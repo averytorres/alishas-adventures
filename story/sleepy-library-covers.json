@@ -1,0 +1,9 @@
+{
+  "status": "DRAFT_ASSETS_PENDING",
+  "stories": {
+    "alisha-sleepy-castle": {
+      "adventure": "../assets/covers/sleepy/adventurer-sleepy-castle.png",
+      "star": "../assets/covers/sleepy/star-princess-sleepy-castle.png"
+    }
+  }
+}

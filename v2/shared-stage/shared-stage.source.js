@@ -126,7 +126,7 @@ export class SharedStage {
     this.renderer.setClearColor(0, 0);
     this.renderer.domElement.className = 'shared-3d-canvas';
     this.renderer.domElement.setAttribute('role', 'img');
-    this.renderer.domElement.setAttribute('aria-label', 'Animated Alisha and dragon');
+    this.renderer.domElement.setAttribute('aria-label', 'Animated Princess Alisha');
     this.renderer.domElement.addEventListener('webglcontextlost', e => { e.preventDefault(); this.stopLoop(); });
     this.renderer.domElement.addEventListener('webglcontextrestored', () => this.startLoop());
   }
@@ -222,6 +222,7 @@ export class SharedStage {
     this.host = host;
     host.classList.remove('dragon-3d-ready');
     this.ensureRenderer();
+    this.renderer.domElement.setAttribute('aria-label', dragon ? 'Animated Princess Alisha and dragon' : 'Animated Princess Alisha');
     host.append(this.renderer.domElement);
     this.resizeObserver.observe(host);
     this.resize();

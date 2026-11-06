@@ -1,0 +1,110 @@
+{
+  "status": "DRAFT_ART_REVIEW",
+  "scenes": {
+    "sleepy_courtyard": {
+      "background": "../assets/scenes/sleepy/courtyard.png",
+      "backgroundPosition": "center center"
+    },
+    "sleepy_bell_hall": {
+      "background": "../assets/scenes/sleepy/hall.png",
+      "backgroundPosition": "center center",
+      "character": "../assets/characters/sleepy/guests-asleep.png",
+      "characterLeft": "5%",
+      "characterBottom": "6%"
+    },
+    "sleepy_garden_gate": {
+      "background": "../assets/scenes/sleepy/garden.png",
+      "backgroundPosition": "center center"
+    },
+    "sleepy_bell_corner": {
+      "background": "../assets/scenes/sleepy/hall.png",
+      "backgroundPosition": "center center"
+    },
+    "sleepy_ribbon_steps": {
+      "background": "../assets/scenes/sleepy/hall.png",
+      "backgroundPosition": "center center",
+      "character": "../assets/characters/sleepy/baker.png",
+      "characterLeft": "7%",
+      "characterBottom": "10%"
+    },
+    "sleepy_paper_stars": {
+      "background": "../assets/scenes/sleepy/window-nook.png",
+      "backgroundPosition": "center center"
+    },
+    "sleepy_cat_basket": {
+      "background": "../assets/scenes/sleepy/window-nook.png",
+      "backgroundPosition": "center center",
+      "character": "../assets/characters/sleepy/cat.png",
+      "characterLeft": "8%",
+      "characterBottom": "8%"
+    },
+    "sleepy_music_room": {
+      "background": "../assets/scenes/sleepy/music-room.png",
+      "backgroundPosition": "center center"
+    },
+    "sleepy_window_nook": {
+      "background": "../assets/scenes/sleepy/window-nook.png",
+      "backgroundPosition": "center center"
+    },
+    "sleepy_dance_floor": {
+      "background": "../assets/scenes/sleepy/ballroom.png",
+      "backgroundPosition": "center center",
+      "character": "../assets/characters/sleepy/birthday-child.png",
+      "characterLeft": "8%",
+      "characterBottom": "10%"
+    },
+    "sleepy_cushion_corner": {
+      "background": "../assets/scenes/sleepy/window-nook.png",
+      "backgroundPosition": "center center",
+      "character": "../assets/characters/sleepy/birthday-child.png",
+      "characterLeft": "8%",
+      "characterBottom": "10%"
+    },
+    "sleepy_moon_balcony": {
+      "background": "../assets/scenes/sleepy/balcony.png",
+      "backgroundPosition": "center center"
+    },
+    "sleepy_ending_grand_ball": {
+      "background": "../assets/scenes/sleepy/ballroom.png",
+      "backgroundPosition": "center center",
+      "character": "../assets/characters/sleepy/birthday-child-awake.png",
+      "characterLeft": "7%",
+      "characterBottom": "9%"
+    },
+    "sleepy_ending_ribbon_dance": {
+      "background": "../assets/scenes/sleepy/ballroom.png",
+      "backgroundPosition": "center center",
+      "character": "../assets/characters/sleepy/birthday-child-awake.png",
+      "characterLeft": "7%",
+      "characterBottom": "9%"
+    },
+    "sleepy_ending_quiet_picnic": {
+      "background": "../assets/scenes/sleepy/picnic.png",
+      "backgroundPosition": "center center",
+      "character": "../assets/characters/sleepy/birthday-child-awake.png",
+      "characterLeft": "7%",
+      "characterBottom": "9%"
+    },
+    "sleepy_ending_pillow_party": {
+      "background": "../assets/scenes/sleepy/window-nook.png",
+      "backgroundPosition": "center center",
+      "character": "../assets/characters/sleepy/birthday-child-awake.png",
+      "characterLeft": "7%",
+      "characterBottom": "9%"
+    },
+    "sleepy_ending_star_party": {
+      "background": "../assets/scenes/sleepy/balcony.png",
+      "backgroundPosition": "center center",
+      "character": "../assets/characters/sleepy/birthday-child-awake.png",
+      "characterLeft": "7%",
+      "characterBottom": "9%"
+    },
+    "sleepy_ending_moon_song": {
+      "background": "../assets/scenes/sleepy/balcony.png",
+      "backgroundPosition": "center center",
+      "character": "../assets/characters/sleepy/birthday-child-awake.png",
+      "characterLeft": "7%",
+      "characterBottom": "9%"
+    }
+  }
+}

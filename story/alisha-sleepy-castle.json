@@ -1,0 +1,266 @@
+{
+  "id": "alisha-sleepy-castle",
+  "title": "Alisha and the Sleepy Castle",
+  "description": "Everyone has dozed off before the birthday party! Follow clues with awake Alisha, discover the lullaby wind, and gently wake the castle for six different celebrations.",
+  "start": "sleepy_courtyard",
+  "scenes": {
+    "sleepy_courtyard": {
+      "situation": "Alisha arrived for the birthday party, but nobody answered the castle door. She opened it. From the entrance hall, she saw the birthday child asleep in a chair in the birthday alcove. The royal baker slept at its cake table, and the castle cat curled beside its window. Only Alisha was awake. A ding came from the hall; a ribbon fluttered beyond the garden door.",
+      "choices": [
+        {
+          "text": "Follow the soft ding.",
+          "next": "sleepy_bell_hall"
+        },
+        {
+          "text": "Follow the silver ribbon.",
+          "next": "sleepy_garden_gate"
+        }
+      ],
+      "hint": "The hall has a sound clue; the garden has a moving ribbon."
+    },
+    "sleepy_bell_hall": {
+      "situation": "In the entrance hall, party guests dozed beneath their paper hats. A bell trembled as a slow tune drifted from the music room. Beside it, a card read, 'When the moon wind hums, eyes grow heavy.' A blue ribbon crossed two low steps into the birthday alcove, toward the baker's cake table. Alisha could listen beside the bell or follow the ribbon for another clue.",
+      "choices": [
+        {
+          "text": "Listen beside the little bell.",
+          "next": "sleepy_bell_corner"
+        },
+        {
+          "text": "Follow the ribbon into the alcove.",
+          "next": "sleepy_ribbon_steps"
+        }
+      ],
+      "hint": "The card mentions moon wind; the ribbon leads into the birthday alcove."
+    },
+    "sleepy_garden_gate": {
+      "situation": "Alisha went through the garden door to the gate. A silver ribbon was tied to a turning pinwheel. There was hardly any breeze, yet it spun to a sleepy tune. Through the open music room window, she saw paper stars hanging inside. Through the next window, she saw the castle cat asleep beside a picnic basket in the birthday alcove. Which clue should she inspect?",
+      "choices": [
+        {
+          "text": "Look through the starry window.",
+          "next": "sleepy_paper_stars"
+        },
+        {
+          "text": "Inspect the cat’s picnic basket.",
+          "next": "sleepy_cat_basket"
+        }
+      ],
+      "hint": "The pinwheel follows a faint wind; the stars and basket may hold clues."
+    },
+    "sleepy_bell_corner": {
+      "situation": "Alisha leaned near the hall bell. The slow tune came through the music room doorway, and the bell gave a small answering ding. A tag said, 'Birthday chimes are bright; lullabies are slow.' The music room door had painted notes on it. Across the hall, a window nook opened beside the birthday alcove. Alisha needed to find where the tune began.",
+      "choices": [
+        {
+          "text": "Trace the tune to the music room.",
+          "next": "sleepy_music_room"
+        },
+        {
+          "text": "Check the window nook.",
+          "next": "sleepy_window_nook"
+        }
+      ],
+      "hint": "The breeze and the slow tune may explain the sleeping guests."
+    },
+    "sleepy_ribbon_steps": {
+      "situation": "The ribbon crossed steps into the birthday alcove and ended at the baker's vanilla cakes. The baker slept at the cake table, spoon in hand; the birthday child still slept in the chair. A note on the tray said, 'A gentle birthday greeting wakes me better than a loud noise.' Alisha heard the same slow tune from the music room and the adjoining window nook.",
+      "choices": [
+        {
+          "text": "Follow the tune to the music room.",
+          "next": "sleepy_music_room"
+        },
+        {
+          "text": "Check the adjoining window nook.",
+          "next": "sleepy_window_nook"
+        }
+      ],
+      "hint": "The baker’s note suggests a gentle way to wake him later."
+    },
+    "sleepy_paper_stars": {
+      "situation": "At the open music room window, paper stars turned in a silver breeze, brushing one another with a soft shh, shh. One star carried the birthday child's drawing of everyone dancing; another showed everyone sharing cake. Beyond the stars, hanging bells played a sleepy tune. Alisha could return inside to the music room or follow the sound toward the adjoining window nook.",
+      "choices": [
+        {
+          "text": "Return inside and enter the music room.",
+          "next": "sleepy_music_room"
+        },
+        {
+          "text": "Follow the tune to the window nook.",
+          "next": "sleepy_window_nook"
+        }
+      ],
+      "hint": "The turning stars show that a breeze is moving through the castle."
+    },
+    "sleepy_cat_basket": {
+      "situation": "Alisha returned through the garden door to the birthday alcove. Beside its window, the castle cat slept with one paw on a picnic basket. Inside were a cloth, cups, and the birthday child's card: 'If the party is too noisy, we can eat outside.' The cat's whiskers twitched at the slow tune. Alisha stroked its back, then listened toward the music room and window nook.",
+      "choices": [
+        {
+          "text": "Listen in the music room.",
+          "next": "sleepy_music_room"
+        },
+        {
+          "text": "Follow the tune to the window nook.",
+          "next": "sleepy_window_nook"
+        }
+      ],
+      "hint": "The cat reacts to the tune; the basket offers a quiet party idea."
+    },
+    "sleepy_music_room": {
+      "situation": "In the music room, Alisha found the answer. Moon wind blew through its open window and across hanging bells, playing a lullaby. That gentle song had lulled everyone to sleep. Alisha closed the window, and the tune stopped. The birthday child still slept in the alcove chair. Alisha could greet the sleepers from the adjoining ballroom or from the cushion corner beside the alcove.",
+      "choices": [
+        {
+          "text": "Try a gentle ballroom greeting.",
+          "next": "sleepy_dance_floor"
+        },
+        {
+          "text": "Bring a quiet greeting to the cushions.",
+          "next": "sleepy_cushion_corner"
+        }
+      ],
+      "hint": "Closing the music room window stops the lullaby; the alcove sleepers still need a gentle greeting."
+    },
+    "sleepy_window_nook": {
+      "situation": "From the window nook beside the birthday alcove, Alisha looked into the music room. Moon wind entered its open window and played the hanging bells like a lullaby. No wonder everyone slept! She stepped in, shut that window, and returned as the song faded. The birthday child still slept in the alcove chair. Alisha could greet the sleepers beside the cushions or from the balcony.",
+      "choices": [
+        {
+          "text": "Start beside the cozy table.",
+          "next": "sleepy_cushion_corner"
+        },
+        {
+          "text": "Bring a greeting toward the stars.",
+          "next": "sleepy_moon_balcony"
+        }
+      ],
+      "hint": "Alisha closed the music room window; the birthday child remains asleep in the alcove chair."
+    },
+    "sleepy_dance_floor": {
+      "situation": "The ballroom was full of sleeping friends in party slippers. Through its open archway, Alisha could see the birthday child still asleep in the alcove chair, the baker at the cake table, and the cat by the window. A bell hung beside the ballroom door; ribbons waited in a basket. She could ring one gentle birthday chime or whisper a greeting while lifting the ribbons.",
+      "choices": [
+        {
+          "text": "Ring one gentle birthday chime.",
+          "next": "sleepy_ending_grand_ball"
+        },
+        {
+          "text": "Whisper hello with the ribbons.",
+          "next": "sleepy_ending_ribbon_dance"
+        }
+      ],
+      "hint": "A single soft chime or a whispered hello can wake them kindly."
+    },
+    "sleepy_cushion_corner": {
+      "situation": "From the cushion corner, Alisha could see into the birthday alcove. The birthday child slept in the chair, the baker at the cake table, and the cat by the window. Alisha smelled vanilla. A picnic cloth waited in the cat's basket, and a door opened onto the moonlit lawn. Pillows circled the corner's low table. She could offer a picnic or tell a cozy story.",
+      "choices": [
+        {
+          "text": "Invite them to a quiet picnic.",
+          "next": "sleepy_ending_quiet_picnic"
+        },
+        {
+          "text": "Tell a cozy birthday story.",
+          "next": "sleepy_ending_pillow_party"
+        }
+      ],
+      "hint": "The cake smells lovely; either invitation can begin softly."
+    },
+    "sleepy_moon_balcony": {
+      "situation": "The safe balcony overlooked the birthday alcove through a wide inner arch. Below, the birthday child still slept in the chair, the baker at the cake table, and the cat beside the window. The lullaby wind had stopped. Above, stars filled the sky. Alisha could gently wake them by calling attention to the stars or singing a soft birthday song. Both promised a calm surprise.",
+      "choices": [
+        {
+          "text": "Invite them to see the stars.",
+          "next": "sleepy_ending_star_party"
+        },
+        {
+          "text": "Sing a gentle moonlight song.",
+          "next": "sleepy_ending_moon_song"
+        }
+      ],
+      "hint": "The stars and song offer two gentle ways to wake the sleepers."
+    },
+    "sleepy_ending_grand_ball": {
+      "situation": "Alisha rang the ballroom bell once: ting! 'Happy birthday,' she whispered through the archway. The birthday child opened sleepy eyes in the alcove chair. The baker and cat stirred, and the other guests woke gradually. Alisha explained the lullaby wind and the closed music room window. Then the baker carried cake into the ballroom. A grand ball began, with slow dancing beneath the ribbons.",
+      "choices": [
+        {
+          "text": "Hear the story again.",
+          "next": "$restart"
+        },
+        {
+          "text": "Choose another story.",
+          "next": "$home"
+        }
+      ],
+      "ending": "good",
+      "hint": "One gentle chime woke the guests for a grand ball."
+    },
+    "sleepy_ending_ribbon_dance": {
+      "situation": "From the ballroom, Alisha lifted a ribbon and whispered through the archway, 'The birthday party is ready.' The child blinked awake in the alcove chair. The baker yawned, the cat stretched, and the guests opened their eyes. Alisha explained the lullaby wind and the closed music room window. Each friend chose a ribbon, made slow circles in the air, and shared the baker's vanilla cake.",
+      "choices": [
+        {
+          "text": "Hear the story again.",
+          "next": "$restart"
+        },
+        {
+          "text": "Choose another story.",
+          "next": "$home"
+        }
+      ],
+      "ending": "good",
+      "hint": "A whispered greeting woke everyone for a gentle ribbon dance."
+    },
+    "sleepy_ending_quiet_picnic": {
+      "situation": "Alisha stepped into the birthday alcove with cake and said, 'Would you like a birthday picnic?' The child smiled awake in the chair. The baker sat up at the cake table, and the cat stirred beside the window. All guests woke. Alisha explained the lullaby wind and closed music room window. Outside, they spread the cloth on the lawn, shared cake, and heard rustling leaves.",
+      "choices": [
+        {
+          "text": "Hear the story again.",
+          "next": "$restart"
+        },
+        {
+          "text": "Choose another story.",
+          "next": "$home"
+        }
+      ],
+      "ending": "good",
+      "hint": "Cake and a soft invitation woke everyone for a quiet picnic."
+    },
+    "sleepy_ending_pillow_party": {
+      "situation": "From the cushions, Alisha began a gentle story about a cat who dreamed of cake. The cat blinked by the alcove window. The birthday child giggled awake in the chair; soon everyone listened. Alisha explained that moon wind had played a lullaby on the music room bells until she closed the window. Everyone gathered around the pillows to share the real cake.",
+      "choices": [
+        {
+          "text": "Hear the story again.",
+          "next": "$restart"
+        },
+        {
+          "text": "Choose another story.",
+          "next": "$home"
+        }
+      ],
+      "ending": "good",
+      "hint": "A cozy story woke the guests for a pillow party."
+    },
+    "sleepy_ending_star_party": {
+      "situation": "From the balcony, Alisha called softly into the birthday alcove, 'Wake up and see the stars!' The child rose from the chair, followed by the baker; the cat stretched by the window, then followed. Guests joined them in the garden. Alisha explained the lullaby wind and the closed window. They counted stars. A shooting star passed as they shared cake and made a wish.",
+      "choices": [
+        {
+          "text": "Hear the story again.",
+          "next": "$restart"
+        },
+        {
+          "text": "Choose another story.",
+          "next": "$home"
+        }
+      ],
+      "ending": "good",
+      "hint": "A gentle invitation woke everyone for a party under the stars."
+    },
+    "sleepy_ending_moon_song": {
+      "situation": "From the balcony, Alisha sang a birthday song into the alcove. The child woke smiling in the chair, and the baker joined from the cake table. The cat stretched by the window; the other guests woke and sang along. Alisha explained the lullaby wind and the closed music room window. Then everyone gathered in the garden, shared cake, and sang a verse beneath the moon.",
+      "choices": [
+        {
+          "text": "Hear the story again.",
+          "next": "$restart"
+        },
+        {
+          "text": "Choose another story.",
+          "next": "$home"
+        }
+      ],
+      "ending": "good",
+      "hint": "A soft song woke everyone for a moonlit birthday party."
+    }
+  }
+}

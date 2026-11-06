@@ -1,0 +1,226 @@
+{
+  "status": "DRAFT_MOTION_SLEEPY_CASTLE",
+  "default": {
+    "mood": "gentle",
+    "talk": "Talk_with_Hands_Open",
+    "facing": 0
+  },
+  "scenes": {
+    "sleepy_courtyard": {
+      "mood": "curious",
+      "talk": "Talk_with_Hands_Open",
+      "facing": -0.06,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Walking_Woman", "dragon": "quiet", "stageAction": "stepForward" },
+        { "at": 0.3, "princess": "Idle_7", "dragon": "quiet", "stageAction": "watchCreature" },
+        { "at": 0.63, "princess": "Confused_Scratch", "dragon": "quiet", "stageAction": "listen" },
+        { "at": 0.84, "princess": "Talk_with_Right_Hand_Open", "dragon": "quiet", "stageAction": "turnRight" }
+      ]
+    },
+    "sleepy_bell_hall": {
+      "mood": "investigating",
+      "talk": "Talk_with_Left_Hand_Raised",
+      "facing": 0.09,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Walking", "dragon": "quiet", "stageAction": "stepForward" },
+        { "at": 0.34, "princess": "Idle_7", "dragon": "quiet", "stageAction": "listen" },
+        { "at": 0.67, "princess": "Talk_with_Left_Hand_Raised", "dragon": "quiet", "stageAction": "lookUp" },
+        { "at": 0.86, "princess": "Walk_Turn_Right_Female", "dragon": "quiet", "stageAction": "turnRight" }
+      ]
+    },
+    "sleepy_garden_gate": {
+      "mood": "wonder",
+      "talk": "Talk_with_Right_Hand_Open",
+      "facing": -0.11,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Walking_Woman", "dragon": "quiet", "stageAction": "followTrail" },
+        { "at": 0.34, "princess": "Talk_with_Left_Hand_Raised", "dragon": "quiet", "stageAction": "lookUp" },
+        { "at": 0.65, "princess": "Idle_7", "dragon": "quiet", "stageAction": "watchCreature" },
+        { "at": 0.84, "princess": "Talk_with_Right_Hand_Open", "dragon": "quiet", "stageAction": "pointPath" }
+      ]
+    },
+    "sleepy_bell_corner": {
+      "mood": "attentive",
+      "talk": "Talk_with_Left_Hand_Raised",
+      "facing": 0.06,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Idle_7", "dragon": "quiet", "stageAction": "listen" },
+        { "at": 0.37, "princess": "Talk_with_Left_Hand_Raised", "dragon": "quiet", "stageAction": "lookUp" },
+        { "at": 0.7, "princess": "Walking", "dragon": "quiet", "stageAction": "followTrail" },
+        { "at": 0.88, "princess": "Talk_with_Right_Hand_Open", "dragon": "quiet", "stageAction": "turnLeft" }
+      ]
+    },
+    "sleepy_ribbon_steps": {
+      "mood": "thoughtful",
+      "talk": "Talk_with_Hands_Open",
+      "facing": -0.05,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Walking_Woman", "dragon": "quiet", "stageAction": "followTrail" },
+        { "at": 0.31, "princess": "Idle_7", "dragon": "quiet", "stageAction": "gather" },
+        { "at": 0.57, "princess": "Talk_with_Hands_Open", "dragon": "quiet", "stageAction": "listen" },
+        { "at": 0.82, "princess": "Walking", "dragon": "quiet", "stageAction": "stepForward" }
+      ]
+    },
+    "sleepy_paper_stars": {
+      "mood": "tender",
+      "talk": "Talk_with_Left_Hand_Raised",
+      "facing": 0.12,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Walking", "dragon": "quiet", "stageAction": "stepForward" },
+        { "at": 0.27, "princess": "Talk_with_Left_Hand_Raised", "dragon": "quiet", "stageAction": "pointSky" },
+        { "at": 0.57, "princess": "Big_Heart_Gesture", "dragon": "quiet", "stageAction": "gather" },
+        { "at": 0.8, "princess": "Walking_Woman", "dragon": "quiet", "stageAction": "followTrail" }
+      ]
+    },
+    "sleepy_cat_basket": {
+      "mood": "gentle",
+      "talk": "Talk_with_Right_Hand_Open",
+      "facing": -0.12,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Idle_7", "dragon": "quiet", "stageAction": "watchCreature" },
+        { "at": 0.3, "princess": "Talk_with_Right_Hand_Open", "dragon": "quiet", "stageAction": "gather" },
+        { "at": 0.59, "princess": "Idle_7", "dragon": "quiet", "stageAction": "listen" },
+        { "at": 0.83, "princess": "Walking_Woman", "dragon": "quiet", "stageAction": "followTrail" }
+      ]
+    },
+    "sleepy_music_room": {
+      "mood": "reassuring",
+      "talk": "Talk_with_Hands_Open",
+      "facing": 0.08,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Walking", "dragon": "quiet", "stageAction": "stepForward" },
+        { "at": 0.26, "princess": "Talk_with_Left_Hand_Raised", "dragon": "quiet", "stageAction": "lookUp" },
+        { "at": 0.53, "princess": "Talk_with_Right_Hand_Open", "dragon": "quiet", "stageAction": "gather" },
+        { "at": 0.77, "princess": "Talk_with_Hands_Open", "dragon": "quiet", "stageAction": "pointPath" }
+      ]
+    },
+    "sleepy_window_nook": {
+      "mood": "hopeful",
+      "talk": "Talk_with_Hands_Open",
+      "facing": -0.08,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Idle_7", "dragon": "quiet", "stageAction": "listen" },
+        { "at": 0.27, "princess": "Talk_with_Left_Hand_Raised", "dragon": "quiet", "stageAction": "lookUp" },
+        { "at": 0.52, "princess": "Talk_with_Right_Hand_Open", "dragon": "quiet", "stageAction": "gather" },
+        { "at": 0.79, "princess": "Walking_Woman", "dragon": "quiet", "stageAction": "turnRight" }
+      ]
+    },
+    "sleepy_dance_floor": {
+      "mood": "careful",
+      "talk": "Talk_with_Right_Hand_Open",
+      "facing": 0.1,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Walking_Woman", "dragon": "quiet", "stageAction": "stepForward" },
+        { "at": 0.32, "princess": "Idle_7", "dragon": "quiet", "stageAction": "watchCreature" },
+        { "at": 0.61, "princess": "Talk_with_Right_Hand_Open", "dragon": "quiet", "stageAction": "gather" },
+        { "at": 0.84, "princess": "Talk_with_Left_Hand_Raised", "dragon": "quiet", "stageAction": "pointPath" }
+      ]
+    },
+    "sleepy_cushion_corner": {
+      "mood": "cozy",
+      "talk": "Talk_with_Hands_Open",
+      "facing": -0.07,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Idle_7", "dragon": "quiet", "stageAction": "watchCreature" },
+        { "at": 0.29, "princess": "Talk_with_Right_Hand_Open", "dragon": "quiet", "stageAction": "gather" },
+        { "at": 0.57, "princess": "Walking_Woman", "dragon": "quiet", "stageAction": "stepForward" },
+        { "at": 0.81, "princess": "Talk_with_Hands_Open", "dragon": "quiet", "stageAction": "rest" }
+      ]
+    },
+    "sleepy_moon_balcony": {
+      "mood": "hopeful",
+      "talk": "Talk_with_Left_Hand_Raised",
+      "facing": 0.13,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Walking_Woman", "dragon": "quiet", "stageAction": "stepForward" },
+        { "at": 0.28, "princess": "Idle_7", "dragon": "quiet", "stageAction": "lookUp" },
+        { "at": 0.55, "princess": "Talk_with_Left_Hand_Raised", "dragon": "quiet", "stageAction": "pointSky" },
+        { "at": 0.8, "princess": "Talk_with_Hands_Open", "dragon": "quiet", "stageAction": "turnLeft" }
+      ]
+    },
+    "sleepy_ending_grand_ball": {
+      "mood": "joyful",
+      "talk": "Talk_Passionately",
+      "facing": 0.07,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Talk_with_Right_Hand_Open", "dragon": "quiet", "stageAction": "listen" },
+        { "at": 0.23, "princess": "Talk_with_Left_Hand_Raised", "dragon": "quiet", "stageAction": "gather" },
+        { "at": 0.53, "princess": "Talk_with_Hands_Open", "dragon": "quiet", "stageAction": "pointPath" },
+        { "at": 0.77, "princess": "Talk_Passionately", "dragon": "quiet", "stageAction": "celebrate" }
+      ]
+    },
+    "sleepy_ending_ribbon_dance": {
+      "mood": "joyful",
+      "talk": "Talk_with_Left_Hand_Raised",
+      "facing": -0.09,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Talk_with_Left_Hand_Raised", "dragon": "quiet", "stageAction": "gather" },
+        { "at": 0.26, "princess": "Talk_with_Right_Hand_Open", "dragon": "quiet", "stageAction": "watchCreature" },
+        { "at": 0.51, "princess": "Talk_with_Hands_Open", "dragon": "quiet", "stageAction": "lookUp" },
+        { "at": 0.76, "princess": "Walk_Turn_Right_Female", "dragon": "quiet", "stageAction": "celebrate" }
+      ]
+    },
+    "sleepy_ending_quiet_picnic": {
+      "mood": "peaceful",
+      "talk": "Talk_with_Hands_Open",
+      "facing": 0.06,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Talk_with_Right_Hand_Open", "dragon": "quiet", "stageAction": "gather" },
+        { "at": 0.29, "princess": "Big_Heart_Gesture", "dragon": "quiet", "stageAction": "watchCreature" },
+        { "at": 0.55, "princess": "Walking_Woman", "dragon": "quiet", "stageAction": "stepForward" },
+        { "at": 0.78, "princess": "Idle_7", "dragon": "quiet", "stageAction": "rest" }
+      ]
+    },
+    "sleepy_ending_pillow_party": {
+      "mood": "cozy",
+      "talk": "Talk_with_Hands_Open",
+      "facing": -0.04,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Talk_with_Hands_Open", "dragon": "quiet", "stageAction": "rest" },
+        { "at": 0.29, "princess": "Talk_with_Right_Hand_Open", "dragon": "quiet", "stageAction": "watchCreature" },
+        { "at": 0.54, "princess": "Talk_with_Left_Hand_Raised", "dragon": "quiet", "stageAction": "lookUp" },
+        { "at": 0.78, "princess": "Big_Heart_Gesture", "dragon": "quiet", "stageAction": "gather" }
+      ]
+    },
+    "sleepy_ending_star_party": {
+      "mood": "wonder",
+      "talk": "Talk_with_Left_Hand_Raised",
+      "facing": 0.11,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Talk_with_Left_Hand_Raised", "dragon": "quiet", "stageAction": "pointSky" },
+        { "at": 0.27, "princess": "Walking_Woman", "dragon": "quiet", "stageAction": "stepForward" },
+        { "at": 0.55, "princess": "Talk_with_Right_Hand_Open", "dragon": "quiet", "stageAction": "lookUp" },
+        { "at": 0.78, "princess": "Big_Heart_Gesture", "dragon": "quiet", "stageAction": "celebrate" }
+      ]
+    },
+    "sleepy_ending_moon_song": {
+      "mood": "serene",
+      "talk": "Talk_with_Hands_Open",
+      "facing": -0.1,
+      "dragon": "quiet",
+      "beats": [
+        { "at": 0, "princess": "Talk_with_Hands_Open", "dragon": "quiet", "stageAction": "listen" },
+        { "at": 0.28, "princess": "Talk_with_Left_Hand_Raised", "dragon": "quiet", "stageAction": "gather" },
+        { "at": 0.54, "princess": "Talk_Passionately", "dragon": "quiet", "stageAction": "pointSky" },
+        { "at": 0.8, "princess": "Big_Heart_Gesture", "dragon": "quiet", "stageAction": "rest" }
+      ]
+    }
+  }
+}

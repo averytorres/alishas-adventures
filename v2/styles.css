@@ -96,6 +96,9 @@ body.reader-page .stage { position: sticky; top: 0; z-index: 4; }
 .stage.shared-3d-ready .character-loading { display: none; }
 .stage.dragon-3d-ready .dragon-study { display: none; }
 .dragon-study[hidden] { display: none; }
+.story-character { position: absolute; width: auto; height: 43%; max-width: 30%; object-fit: contain; z-index: 2; transform-origin: bottom center; animation: story-character-breathe 3.8s ease-in-out infinite; pointer-events: none; filter: drop-shadow(0 5px 8px #35275455); }
+@keyframes story-character-breathe { 0%, 100% { transform: rotate(-1deg) translateY(0); } 50% { transform: rotate(1deg) translateY(-4px); } }
+@media (prefers-reduced-motion: reduce) { .story-character { animation: none; } }
 
 
 /* Choice transitions cover the viewport while the next scene's stage mounts. */
