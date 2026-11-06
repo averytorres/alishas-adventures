@@ -297,6 +297,17 @@ function renderReader(announce = true) {
       character.style.bottom = art.characterBottom || '12%';
       stage.append(character);
     }
+    for (const actor of art.characters || []) {
+      const character = node('img', 'story-character');
+      character.src = actor.src;
+      character.alt = '';
+      character.style.left = actor.left || '10%';
+      character.style.bottom = actor.bottom || '12%';
+      if (actor.height) character.style.height = actor.height;
+      if (actor.maxWidth) character.style.maxWidth = actor.maxWidth;
+      if (actor.float) character.classList.add('story-character--float');
+      stage.append(character);
+    }
     if (art.dragon) {
       const dragon = node('img', 'dragon-study'); dragon.src = art.dragon; dragon.alt = '';
       stage.append(dragon);
@@ -448,30 +459,32 @@ async function loadJson(url) {
 }
 async function init() {
   try {
-    const [base, sleepy, en, es, gu, sleepyEn, sleepyEs, sleepyGu, uiEn, uiEs, uiGu, audio, sleepyAudio, timings, sleepyTimings, art, sleepyArt, covers, sleepyCovers, motions, sleepyMotions] = await Promise.all([
+    const [base, sleepy, cloud, en, es, gu, sleepyEn, sleepyEs, sleepyGu, cloudEn, cloudEs, cloudGu, uiEn, uiEs, uiGu, audio, sleepyAudio, cloudAudio, timings, sleepyTimings, cloudTimings, art, sleepyArt, cloudArt, covers, sleepyCovers, cloudCovers, motions, sleepyMotions, cloudMotions] = await Promise.all([
       loadJson('../story/alisha-lost-star.json'),
       loadJson('../story/alisha-sleepy-castle.json'),
+      loadJson('../story/alisha-cloud-wouldnt-rain.json'),
       loadJson('../story/locales/en.draft.json'), loadJson('../story/locales/es.draft.json'), loadJson('../story/locales/gu.draft.json'),
       loadJson('../story/locales/sleepy.en.json'), loadJson('../story/locales/sleepy.es.json'), loadJson('../story/locales/sleepy.gu.json'),
+      loadJson('../story/locales/cloud.en.json'), loadJson('../story/locales/cloud.es.json'), loadJson('../story/locales/cloud.gu.json'),
       loadJson('../story/locales/ui.en.draft.json'), loadJson('../story/locales/ui.es.draft.json'), loadJson('../story/locales/ui.gu.draft.json'),
-      loadJson('../audio/manifest.json'), loadJson('../audio/sleepy-manifest.json'),
-      loadJson('../audio/word-timings.draft.json'), loadJson('../audio/sleepy-word-timings.json'),
-      loadJson('../story/scene-art.draft.json'), loadJson('../story/sleepy-scene-art.json'),
-      loadJson('../story/library-covers.draft.json'), loadJson('../story/sleepy-library-covers.json'),
-      loadJson('../story/body-motion.draft.json'), loadJson('../story/sleepy-body-motion.json')
+      loadJson('../audio/manifest.json'), loadJson('../audio/sleepy-manifest.json'), loadJson('../audio/cloud-manifest.json'),
+      loadJson('../audio/word-timings.draft.json'), loadJson('../audio/sleepy-word-timings.json'), loadJson('../audio/cloud-word-timings.json'),
+      loadJson('../story/scene-art.draft.json'), loadJson('../story/sleepy-scene-art.json'), loadJson('../story/cloud-scene-art.json'),
+      loadJson('../story/library-covers.draft.json'), loadJson('../story/sleepy-library-covers.json'), loadJson('../story/cloud-library-covers.json'),
+      loadJson('../story/body-motion.draft.json'), loadJson('../story/sleepy-body-motion.json'), loadJson('../story/cloud-body-motion.json')
     ]);
-    baseStories = [base, sleepy];
+    baseStories = [base, sleepy, cloud];
     localeContent = {
-      en: { language: 'en', lines: { ...en.lines, ...sleepyEn.lines } },
-      es: { language: 'es', lines: { ...es.lines, ...sleepyEs.lines } },
-      gu: { language: 'gu', lines: { ...gu.lines, ...sleepyGu.lines } }
+      en: { language: 'en', lines: { ...en.lines, ...sleepyEn.lines, ...cloudEn.lines } },
+      es: { language: 'es', lines: { ...es.lines, ...sleepyEs.lines, ...cloudEs.lines } },
+      gu: { language: 'gu', lines: { ...gu.lines, ...sleepyGu.lines, ...cloudGu.lines } }
     };
     uiContent = { en: uiEn.lines, es: uiEs.lines, gu: uiGu.lines };
-    audioManifest = Object.fromEntries(['en', 'es', 'gu'].map(language => [language, { ...audio.recordings[language], ...sleepyAudio.recordings[language] }]));
-    wordTimings = Object.fromEntries(['en', 'es', 'gu'].map(language => [language, { ...timings.timings[language], ...sleepyTimings.timings[language] }]));
-    sceneArt = { ...art.scenes, ...sleepyArt.scenes };
-    libraryCovers = { ...covers.stories, ...sleepyCovers.stories };
-    bodyMotion = { ...motions, scenes: { ...motions.scenes, ...sleepyMotions.scenes } };
+    audioManifest = Object.fromEntries(['en', 'es', 'gu'].map(language => [language, { ...audio.recordings[language], ...sleepyAudio.recordings[language], ...cloudAudio.recordings[language] }]));
+    wordTimings = Object.fromEntries(['en', 'es', 'gu'].map(language => [language, { ...timings.timings[language], ...sleepyTimings.timings[language], ...cloudTimings.timings[language] }]));
+    sceneArt = { ...art.scenes, ...sleepyArt.scenes, ...cloudArt.scenes };
+    libraryCovers = { ...covers.stories, ...sleepyCovers.stories, ...cloudCovers.stories };
+    bodyMotion = { ...motions, scenes: { ...motions.scenes, ...sleepyMotions.scenes, ...cloudMotions.scenes } };
     state = normalizeState(readSavedState(browserStorage(window)), baseStories);
     ui = uiContent[state.language]; setNarrator(); render();
   } catch (error) { root.replaceChildren(node('p', 'load-error', `Alisha’s Adventures could not load: ${error.message}.`)); }

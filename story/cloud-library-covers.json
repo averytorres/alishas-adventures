@@ -1,0 +1,9 @@
+{
+  "status": "DRAFT_ART_REVIEW",
+  "stories": {
+    "alisha-cloud-wouldnt-rain": {
+      "adventure": "../assets/covers/cloud/adventurer-cloud.png",
+      "star": "../assets/covers/cloud/star-princess-cloud.png"
+    }
+  }
+}

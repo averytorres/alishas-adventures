@@ -1,0 +1,266 @@
+{
+  "id": "alisha-cloud-wouldnt-rain",
+  "title": "Alisha and the Cloud That Wouldn't Rain",
+  "description": "A little cloud wants to help the thirsty garden, but its raindrops feel shy. Follow gentle clues with Alisha and discover six lovely ways to begin.",
+  "start": "cloud_meadow_gate",
+  "scenes": {
+    "cloud_meadow_gate": {
+      "situation": "Alisha came to the meadow gate with a ribbon. The daisies drooped in the warm afternoon. Above them floated a small gray cloud with a worried face. 'I want to give them rain,' it said, 'but my drops will not come out.' Alisha promised to help. A kite tugged in the breezy lane; dew shone along the shaded path. Which clue would she follow?",
+      "choices": [
+        {
+          "text": "Watch the kite in the breeze.",
+          "next": "cloud_windy_lane"
+        },
+        {
+          "text": "Look at the little drops of dew.",
+          "next": "cloud_dew_path"
+        }
+      ],
+      "hint": "The kite may show how air moves; the dew shows how tiny drops begin."
+    },
+    "cloud_windy_lane": {
+      "situation": "Alisha and the little cloud walked into the breezy lane. A paper kite dipped and rose. Its long tail brushed the leaves with a soft tap, tap. A sparrow perched nearby, smoothing a feather. The cloud listened. 'Those are not loud at all,' it said. Alisha noticed its round belly shimmer. She could study the kite's tapping tail or ask the sparrow about the feather.",
+      "choices": [
+        {
+          "text": "Study the kite tail.",
+          "next": "cloud_kite_tail"
+        },
+        {
+          "text": "Ask the sparrow about its feather.",
+          "next": "cloud_sparrow_feather"
+        }
+      ],
+      "hint": "The tail taps leaves; the feather touches them even more softly."
+    },
+    "cloud_dew_path": {
+      "situation": "Under the trees, Alisha found dew shining on the grass. The little cloud lowered itself to look. One bead rested on a leaf beside a friendly snail. Farther along, a shallow puddle held a perfect blue patch of sky. 'These drops are small,' the cloud whispered. 'Perhaps small is enough.' Alisha could watch the dew with the snail or see what happened at the puddle.",
+      "choices": [
+        {
+          "text": "Watch the dew beside the snail.",
+          "next": "cloud_snail_leaf"
+        },
+        {
+          "text": "Look at the shallow puddle.",
+          "next": "cloud_puddle_ring"
+        }
+      ],
+      "hint": "Dew and puddles can both teach the cloud about one little drop."
+    },
+    "cloud_kite_tail": {
+      "situation": "The kite tail touched a leaf and made it bounce once. Alisha asked the cloud to listen: tap. The cloud's belly gave a silver shimmer, but no rain fell yet. 'I thought rain had to start with a big splash,' it admitted. Alisha smiled. 'That leaf liked one small tap.' A hill offered quiet listening; a sheltered grove offered soft leaves to try.",
+      "choices": [
+        {
+          "text": "Listen together on the hill.",
+          "next": "cloud_listening_hill"
+        },
+        {
+          "text": "Try the leaves in the grove.",
+          "next": "cloud_sheltered_grove"
+        }
+      ],
+      "hint": "The leaf moved with one gentle tap; the cloud need not begin loudly."
+    },
+    "cloud_sparrow_feather": {
+      "situation": "The sparrow let one feather drift onto Alisha's palm. She held it beneath a leaf. The feather brushed the leaf. The cloud almost missed it. Then the leaf moved. 'Even that tiny touch did something,' the cloud said. Its belly shimmered again. The sparrow pointed toward a hill and grove. Alisha thanked it, then invited the cloud to choose a quieter place to practice.",
+      "choices": [
+        {
+          "text": "Go to the listening hill.",
+          "next": "cloud_listening_hill"
+        },
+        {
+          "text": "Practice beneath the grove leaves.",
+          "next": "cloud_sheltered_grove"
+        }
+      ],
+      "hint": "A very small touch can start a change."
+    },
+    "cloud_snail_leaf": {
+      "situation": "The snail watched a bead of dew slide to its leaf's tip. Plip! It landed on a patch of dry earth. The little cloud leaned closer. 'Just one drop?' it asked. The snail nodded and kept moving at its own pace. Alisha saw a listening hill beyond the grass and a sheltered grove. The cloud still needed a calm place to try its first drop.",
+      "choices": [
+        {
+          "text": "Talk on the quiet hill.",
+          "next": "cloud_listening_hill"
+        },
+        {
+          "text": "Try beneath the grove leaves.",
+          "next": "cloud_sheltered_grove"
+        }
+      ],
+      "hint": "The dew began with one drop, and the snail did not hurry."
+    },
+    "cloud_puddle_ring": {
+      "situation": "Alisha dipped one fingertip into the shallow puddle. A little ring traveled outward, then another. The cloud copied the circle with its mouth. 'One touch made all those rings,' it said. It looked less worried now, though its drops still waited inside. The path opened toward a quiet hill and a grove with broad leaves. Either place might help the cloud feel ready to begin.",
+      "choices": [
+        {
+          "text": "Listen together on the hill.",
+          "next": "cloud_listening_hill"
+        },
+        {
+          "text": "Find a broad leaf in the grove.",
+          "next": "cloud_sheltered_grove"
+        }
+      ],
+      "hint": "One gentle touch made ripples; a first raindrop can be small."
+    },
+    "cloud_listening_hill": {
+      "situation": "On the hill, Alisha sat with the cloud and listened to leaves, grass, and a sparrow below. 'Why won't you rain?' she asked. 'I thought I must pour all at once,' said the cloud. 'That feels too big.' Alisha held out her ribbon. 'Begin with one tiny drop,' she said. The cloud breathed. Below lay a thirsty flower garden and a pond that welcomed ripples.",
+      "choices": [
+        {
+          "text": "Visit the flower garden.",
+          "next": "cloud_flower_garden"
+        },
+        {
+          "text": "Go to the pond bank.",
+          "next": "cloud_pond_bank"
+        }
+      ],
+      "hint": "The cloud can start with one drop; choose where that drop would help."
+    },
+    "cloud_sheltered_grove": {
+      "situation": "In the grove, leaves made a roof. The cloud waited. 'I thought all my rain had to arrive at once,' it told Alisha. 'Then I got too shy to start.' Alisha pointed to a leaf. 'One drop begins it.' A silver bead gathered inside the cloud. Nearby, a pond waited for ripples; an orchard needed a drink. Which place should receive the first drop?",
+      "choices": [
+        {
+          "text": "Try a drop by the pond.",
+          "next": "cloud_pond_bank"
+        },
+        {
+          "text": "Carry the drop to the orchard.",
+          "next": "cloud_orchard_path"
+        }
+      ],
+      "hint": "One drop is enough to begin; both places can use gentle rain."
+    },
+    "cloud_flower_garden": {
+      "situation": "In the flower garden, dry soil surrounded seedlings. The daisies lifted their faces toward the cloud. Alisha spread her ribbon between two sticks to catch the light. 'You may begin slowly,' she told her friend. A broad leaf shaded the seedlings, and sunlight touched the ribbon. The cloud held one drop. Should it help the roots first or make a bright surprise above the flowers?",
+      "choices": [
+        {
+          "text": "Give the seedlings a little drink.",
+          "next": "cloud_ending_seedling_sip"
+        },
+        {
+          "text": "Make rain sparkle beside the ribbon.",
+          "next": "cloud_ending_rainbow_ribbon"
+        }
+      ],
+      "hint": "The roots need water; sunlit drops may make a rainbow."
+    },
+    "cloud_pond_bank": {
+      "situation": "At the pond, lily pads rested like green plates. A narrow stream beside them carried Alisha's paper boat, but it barely moved. The little cloud held its first drop over the water. 'Where should it go?' it asked. Alisha could point to the lily pads for a gentle tune or to the stream for a tiny boat journey. Both would welcome a soft shower.",
+      "choices": [
+        {
+          "text": "Let drops tap the lily pads.",
+          "next": "cloud_ending_lily_song"
+        },
+        {
+          "text": "Help the paper boat float.",
+          "next": "cloud_ending_paper_boat"
+        }
+      ],
+      "hint": "The pads can make music; the stream can carry the boat."
+    },
+    "cloud_orchard_path": {
+      "situation": "The orchard smelled of ripe apples. Leaves wore a little dust after warm days. An empty rain barrel stood under a shed spout. Alisha showed the cloud the trees and barrel. 'I can start with one drop,' it said bravely. A leaf waited above the apples; the barrel waited below. Should the cloud freshen the trees now or save a gift for tomorrow?",
+      "choices": [
+        {
+          "text": "Give the apple leaves a gentle shower.",
+          "next": "cloud_ending_apple_shine"
+        },
+        {
+          "text": "Fill the rain barrel for tomorrow.",
+          "next": "cloud_ending_rain_barrel"
+        }
+      ],
+      "hint": "Leaves can enjoy rain now; the barrel can save it for later."
+    },
+    "cloud_ending_seedling_sip": {
+      "situation": "The cloud let one drop fall onto the broad leaf. Plip! It slid into the soil beside a seedling. 'I did it,' the cloud whispered. Another drop followed, then a soft shower. The thirsty roots drank, and the daisies stood taller. Alisha held out her palm and felt a cool tickle. The cloud smiled. Its first rain had helped the smallest plants in the garden.",
+      "choices": [
+        {
+          "text": "Hear the story again.",
+          "next": "$restart"
+        },
+        {
+          "text": "Choose another story.",
+          "next": "$home"
+        }
+      ],
+      "ending": "good",
+      "hint": "The cloud began with one drop and watered the seedlings."
+    },
+    "cloud_ending_rainbow_ribbon": {
+      "situation": "The cloud released one drop beside Alisha's sunlit ribbon. Then a few more floated down. The warm light shone through the gentle rain, and a rainbow appeared above the flowers. The cloud gasped. 'My rain can make colors!' The daisies received a drink while Alisha pointed out red, yellow, and blue. She tied the ribbon to the gate to remember their rainbow.",
+      "choices": [
+        {
+          "text": "Hear the story again.",
+          "next": "$restart"
+        },
+        {
+          "text": "Choose another story.",
+          "next": "$home"
+        }
+      ],
+      "ending": "good",
+      "hint": "Sunlight and the cloud’s gentle rain made a small rainbow."
+    },
+    "cloud_ending_lily_song": {
+      "situation": "One drop tapped a lily pad: plink. Another tapped the next: plonk. The cloud laughed and let a soft shower play across the pond. Alisha listened as each pad made its own note. A sparrow sang along nearby. When the rain slowed, the cloud waited to hear the last ripple fade. 'That was my rain song,' it said proudly. Alisha gave it a happy bow.",
+      "choices": [
+        {
+          "text": "Hear the story again.",
+          "next": "$restart"
+        },
+        {
+          "text": "Choose another story.",
+          "next": "$home"
+        }
+      ],
+      "ending": "good",
+      "hint": "Drops on lily pads gave the cloud its own rain song."
+    },
+    "cloud_ending_paper_boat": {
+      "situation": "The cloud sent one drop into the stream beside Alisha's paper boat. Then a gentle shower made the water trickle faster. The boat drifted around a smooth bend, near the bank. Alisha walked beside it, smiling. The cloud followed overhead and counted each new ripple. 'I can help a little journey begin,' it said. At the pond, Alisha caught the boat and kept it safe.",
+      "choices": [
+        {
+          "text": "Hear the story again.",
+          "next": "$restart"
+        },
+        {
+          "text": "Choose another story.",
+          "next": "$home"
+        }
+      ],
+      "ending": "good",
+      "hint": "Gentle rain gave the paper boat a short, safe journey."
+    },
+    "cloud_ending_apple_shine": {
+      "situation": "The first drop touched an apple leaf. A soft shower followed, rinsing leaves and making apples gleam. Alisha watched each drop slide from leaf to leaf. The orchard smelled fresh. 'I was worried my rain would be too much,' said the cloud. 'But this little shower feels just right.' Alisha thanked it. They sat beneath the trees until the rain became a silver mist.",
+      "choices": [
+        {
+          "text": "Hear the story again.",
+          "next": "$restart"
+        },
+        {
+          "text": "Choose another story.",
+          "next": "$home"
+        }
+      ],
+      "ending": "good",
+      "hint": "The cloud’s soft shower freshened the apple trees."
+    },
+    "cloud_ending_rain_barrel": {
+      "situation": "Alisha pointed to the spout above the barrel. The cloud offered one drop, then a gentle patter on the orchard roof. Water ran down the spout and began to fill the barrel. 'We can save this for plants tomorrow,' Alisha said. The cloud beamed. Its rain could help even after it stopped. Together they listened to the barrel's quiet drip, drip, drip and planned watering.",
+      "choices": [
+        {
+          "text": "Hear the story again.",
+          "next": "$restart"
+        },
+        {
+          "text": "Choose another story.",
+          "next": "$home"
+        }
+      ],
+      "ending": "good",
+      "hint": "The barrel saved the cloud’s rain for the next warm day."
+    }
+  }
+}

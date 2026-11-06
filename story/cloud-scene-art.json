@@ -1,0 +1,136 @@
+{
+  "status": "DRAFT_ART_REVIEW",
+  "scenes": {
+    "cloud_meadow_gate": {
+      "background": "../assets/scenes/cloud/dry-garden.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/shy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true }
+      ]
+    },
+    "cloud_windy_lane": {
+      "background": "../assets/scenes/cloud/windy-lane.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/shy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true },
+        { "src": "../assets/characters/cloud/sparrow.png", "left": "5%", "bottom": "13%", "height": "24%", "maxWidth": "18%" }
+      ]
+    },
+    "cloud_dew_path": {
+      "background": "../assets/scenes/cloud/grove.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/shy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true }
+      ]
+    },
+    "cloud_kite_tail": {
+      "background": "../assets/scenes/cloud/windy-lane.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/shy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true }
+      ]
+    },
+    "cloud_sparrow_feather": {
+      "background": "../assets/scenes/cloud/windy-lane.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/shy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true },
+        { "src": "../assets/characters/cloud/sparrow.png", "left": "5%", "bottom": "13%", "height": "24%", "maxWidth": "18%" }
+      ]
+    },
+    "cloud_snail_leaf": {
+      "background": "../assets/scenes/cloud/grove.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/shy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true },
+        { "src": "../assets/characters/cloud/snail.png", "left": "6%", "bottom": "6%", "height": "21%", "maxWidth": "18%" }
+      ]
+    },
+    "cloud_puddle_ring": {
+      "background": "../assets/scenes/cloud/pond.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/shy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true }
+      ]
+    },
+    "cloud_listening_hill": {
+      "background": "../assets/scenes/cloud/hilltop.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/shy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true },
+        { "src": "../assets/characters/cloud/sparrow.png", "left": "5%", "bottom": "13%", "height": "24%", "maxWidth": "18%" }
+      ]
+    },
+    "cloud_sheltered_grove": {
+      "background": "../assets/scenes/cloud/grove.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/shy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true }
+      ]
+    },
+    "cloud_flower_garden": {
+      "background": "../assets/scenes/cloud/dry-garden.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/shy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true }
+      ]
+    },
+    "cloud_pond_bank": {
+      "background": "../assets/scenes/cloud/pond.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/shy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true }
+      ]
+    },
+    "cloud_orchard_path": {
+      "background": "../assets/scenes/cloud/orchard.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/shy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true }
+      ]
+    },
+    "cloud_ending_seedling_sip": {
+      "background": "../assets/scenes/cloud/dry-garden.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/happy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true }
+      ]
+    },
+    "cloud_ending_rainbow_ribbon": {
+      "background": "../assets/scenes/cloud/rainbow-fountain.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/happy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true }
+      ]
+    },
+    "cloud_ending_lily_song": {
+      "background": "../assets/scenes/cloud/pond.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/happy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true },
+        { "src": "../assets/characters/cloud/sparrow.png", "left": "5%", "bottom": "13%", "height": "24%", "maxWidth": "18%" }
+      ]
+    },
+    "cloud_ending_paper_boat": {
+      "background": "../assets/scenes/cloud/pond.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/happy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true }
+      ]
+    },
+    "cloud_ending_apple_shine": {
+      "background": "../assets/scenes/cloud/orchard.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/happy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true }
+      ]
+    },
+    "cloud_ending_rain_barrel": {
+      "background": "../assets/scenes/cloud/orchard.png",
+      "backgroundPosition": "center center",
+      "characters": [
+        { "src": "../assets/characters/cloud/happy-cloud.png", "left": "62%", "bottom": "53%", "height": "35%", "maxWidth": "33%", "float": true }
+      ]
+    }
+  }
+}
