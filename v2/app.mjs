@@ -182,15 +182,16 @@ function renderLibrary(announce = true) {
     const text = node('div', 'story-card-text');
     text.append(node('h2', '', localized.title), node('p', '', localized.description));
     const saved = state.progress[base.id];
+    const hasStarted = Boolean(saved && saved !== base.start);
     const controls = node('div', 'card-actions');
-    const start = button(saved ? ui['library.resume'] : ui['library.start'], () => openStory(base.id), 'primary');
+    const start = button(hasStarted ? ui['library.resume'] : ui['library.start'], () => openStory(base.id), 'primary');
     // The large art action and separate speaker action never share a click target.
     const artAction = button(extraUi[state.language].open, () => {}, 'art-action');
     artAction.setAttribute('aria-label', `${localized.title}. ${extraUi[state.language].open}`);
     art.append(artAction);
     attachHold(artAction, speechCooldown(() => narrator.play([{ id: `${base.id}.description`, text: localized.description }])), () => openStory(base.id));
     controls.append(start);
-    if (saved) controls.append(button('↺  ' + ui['library.restart'], () => openStory(base.id, true), 'quiet restart-story'));
+    if (hasStarted) controls.append(button('↺  ' + ui['library.restart'], () => openStory(base.id, true), 'quiet restart-story'));
     controls.append(button('🔊  ' + ui['library.storySpeaker'], speechCooldown(() => narrator.play([{ id: `${base.id}.description`, text: localized.description }])), 'small-speaker'));
     card.append(art, text, controls); shelf.append(card);
   }
