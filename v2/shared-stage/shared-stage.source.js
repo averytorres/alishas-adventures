@@ -18,6 +18,8 @@ const STORY_ACTIONS = new Set(['carryStar', 'carryShimmer', 'hug', 'curl']);
 const DRAGON_BEHAVIOR_CLIP = { curious: 'Story_Listen', help: 'Story_Offer',
   protect: 'Story_Protect', celebrate: 'Story_Celebrate', search: 'Story_Search',
   soothe: 'Story_Rest', rest: 'Story_Rest' };
+
+// Stage offsets and travel
 // Small stage movements complement the authored clips. Values are [horizontal, vertical,
 // turn, forward lean, side lean, horizontal sway]. They stay inside the story artwork.
 const STAGE_ACTIONS = {
@@ -57,16 +59,19 @@ const HEAD_ACTIONS = {
   rest: [.075, 0, 0], followTrail: [.07, .08, 0], crossBridge: [.035, .055, 0],
   watchCreature: [.11, -.13, .055]
 };
-const stageOffset = (name, actor, age) => {
-  const a = STAGE_ACTIONS[name]?.[actor];
-  if (!a) return { x: 0, y: 0, turn: 0, pitch: 0, roll: 0 };
-  const sway = a[5] * Math.sin(age * 2.6);
-  const travel = STAGE_TRAVEL[name]?.[actor] || 0;
+function stageOffset(name, actor, age) {
+  const [x, y, turn, pitch, roll, swayAmount] = STAGE_ACTIONS[name]?.[actor] || [];
+  if (x === undefined) return { x: 0, y: 0, turn: 0, pitch: 0, roll: 0 };
+  const sway = swayAmount * Math.sin(age * 2.6);
+  const travelDistance = STAGE_TRAVEL[name]?.[actor] || 0;
   const progress = Math.min(1, Math.max(0, age) / 1.35);
-  return { x: a[0] + travel * (progress * progress * (3 - 2 * progress)) + sway,
-    y: a[1] + Math.abs(sway) * .35,
-    turn: a[2], pitch: a[3], roll: a[4] };
-};
+  const easedProgress = progress * progress * (3 - 2 * progress);
+  return {
+    x: x + travelDistance * easedProgress + sway,
+    y: y + Math.abs(sway) * .35,
+    turn, pitch, roll
+  };
+}
 const LOWER_BODY = /mixamorig:(?:Hips|LeftUpLeg|RightUpLeg|LeftLeg|RightLeg|LeftFoot|LeftToeBase|RightToeBase)(?:[.\[:]|$)/i;
 const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 const finite = (n, fallback) => Number.isFinite(Number(n)) ? Number(n) : fallback;
@@ -137,8 +142,10 @@ export class SharedStage {
     for (let i = 0; i < 10; i++) {
       const angle = -Math.PI / 2 + i * Math.PI / 5;
       const radius = i % 2 ? .42 : 1;
-      const x = Math.cos(angle) * radius, y = Math.sin(angle) * radius;
-      if (i) shape.lineTo(x, y); else shape.moveTo(x, y);
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius;
+      if (i) shape.lineTo(x, y);
+      else shape.moveTo(x, y);
     }
     shape.closePath();
     const geometry = new THREE.ShapeGeometry(shape);
@@ -157,16 +164,25 @@ export class SharedStage {
   makeActor(key, gltf) {
     const model = gltf.scene;
     model.traverse(part => {
-      if (part.name === 'Icosphere') { part.visible = false; return; }
+      if (part.name === 'Icosphere') {
+        part.visible = false;
+        return;
+      }
       if (!part.isMesh) return;
-      const unlit = source => new THREE.MeshBasicMaterial({ map: source.map, color: source.color,
-        side: source.side, transparent: source.transparent, opacity: source.opacity,
-        alphaTest: source.alphaTest, toneMapped: false });
+      const unlit = source => new THREE.MeshBasicMaterial({
+        map: source.map,
+        color: source.color,
+        side: source.side,
+        transparent: source.transparent,
+        opacity: source.opacity,
+        alphaTest: source.alphaTest,
+        toneMapped: false
+      });
       part.material = Array.isArray(part.material) ? part.material.map(unlit) : unlit(part.material);
     });
     const mixer = new THREE.AnimationMixer(model);
     const idleName = key === 'dragon' ? 'Animation' : 'Idle_7';
-    const idle = gltf.animations.find(c => c.name === idleName) || gltf.animations[0];
+    const idle = gltf.animations.find(clip => clip.name === idleName) || gltf.animations[0];
     const idleAction = idle ? mixer.clipAction(idle).setLoop(THREE.LoopRepeat).play() : null;
     const clips = new Map();
     for (const clip of gltf.animations) {
@@ -226,7 +242,7 @@ export class SharedStage {
     host.append(this.renderer.domElement);
     this.resizeObserver.observe(host);
     this.resize();
-    for (const [key, actor] of this.actors) actor.model.visible = false;
+    for (const actor of this.actors.values()) actor.model.visible = false;
     const gltf = await this.preload(princess);
     if (this.disposed || token !== this.token || this.host !== host) return { stale: true };
     const existingPrincess = this.actors.get(princess);
@@ -260,9 +276,11 @@ export class SharedStage {
 
   resize() {
     if (!this.renderer || !this.host?.isConnected) return;
-    const width = Math.max(1, this.host.clientWidth), height = Math.max(1, this.host.clientHeight);
+    const width = Math.max(1, this.host.clientWidth);
+    const height = Math.max(1, this.host.clientHeight);
     this.renderer.setSize(width, height, false);
-    const halfHeight = 1.22, aspect = width / height;
+    const halfHeight = 1.22;
+    const aspect = width / height;
     this.camera.left = -halfHeight * aspect;
     this.camera.right = halfHeight * aspect;
     this.camera.top = halfHeight;
@@ -271,18 +289,24 @@ export class SharedStage {
   }
 
   play(actor, name, once = false) {
-    if (!actor || name === 'Idle_7') { this.stopGesture(actor); return; }
+    if (!actor || name === 'Idle_7') {
+      this.stopGesture(actor);
+      return;
+    }
     if (!actor.clips.has(name) || actor.name === name) return;
     const next = actor.mixer.clipAction(actor.clips.get(name));
     actor.action?.fadeOut(.55);
     next.reset().setLoop(once ? THREE.LoopOnce : THREE.LoopRepeat).setEffectiveWeight(1).fadeIn(.55).play();
     next.clampWhenFinished = once;
-    actor.action = next; actor.name = name;
+    actor.action = next;
+    actor.name = name;
   }
 
   stopGesture(actor) {
     if (!actor) return;
-    actor.action?.fadeOut(.55); actor.action = null; actor.name = null;
+    actor.action?.fadeOut(.55);
+    actor.action = null;
+    actor.name = null;
   }
 
   startTalk(actor) {
@@ -298,18 +322,25 @@ export class SharedStage {
     this.starRelease = null;
     this.starFade = 0;
     this.star.visible = false;
-    this.motion = { talk: GESTURES.has(motion.talk) ? motion.talk : 'Talk_with_Hands_Open',
+    this.motion = {
+      talk: GESTURES.has(motion.talk) ? motion.talk : 'Talk_with_Hands_Open',
       facing: clamp(finite(motion.facing, 0), -.25, .25),
-      dragon: DRAGON_ACTIONS.has(motion.dragon) ? motion.dragon : 'quiet', effect: null,
-      stageAction: null, dragonClip: null,
+      dragon: DRAGON_ACTIONS.has(motion.dragon) ? motion.dragon : 'quiet',
+      effect: null,
+      stageAction: null,
+      dragonClip: null,
       beats: Array.isArray(motion.beats) ? motion.beats.filter(beat =>
         Number.isFinite(beat.at) && beat.at >= 0 && beat.at <= 1 &&
-        GESTURES.has(beat.princess) && DRAGON_ACTIONS.has(beat.dragon)) : [] };
+        GESTURES.has(beat.princess) && DRAGON_ACTIONS.has(beat.dragon)) : []
+    };
     this.activeBeat = -1;
     this.accentPlayed = false;
     this.setNarrationProgress(0);
     const actor = this.actors.get(this.currentPrincess);
-    if (actor) { actor.targetFacing = this.motion.facing; if (this.talking) this.startTalk(actor); }
+    if (actor) {
+      actor.targetFacing = this.motion.facing;
+      if (this.talking) this.startTalk(actor);
+    }
   }
 
   // Word timing drives scene action, rather than replaying one gesture for the whole paragraph.
@@ -317,7 +348,9 @@ export class SharedStage {
     const beats = this.motion.beats;
     if (!beats?.length) return;
     let index = 0;
-    for (let i = 1; i < beats.length; i++) if (progress >= beats[i].at) index = i;
+    for (let i = 1; i < beats.length; i++) {
+      if (progress >= beats[i].at) index = i;
+    }
     if (index === this.activeBeat) return;
     this.activeBeat = index;
     this.actionAge = 0;
@@ -374,22 +407,25 @@ export class SharedStage {
     this.raf = requestAnimationFrame(this.tick);
   }
 
-  stopLoop() { if (this.raf) cancelAnimationFrame(this.raf); this.raf = 0; }
+  stopLoop() {
+    if (this.raf) cancelAnimationFrame(this.raf);
+    this.raf = 0;
+  }
 
   tick() {
     this.raf = 0;
     if (!this.host?.isConnected || this.disposed || !this.renderer) return;
-    const dt = Math.min(this.clock.getDelta(), .05);
-    this.actionAge += dt;
+    const elapsed = Math.min(this.clock.getDelta(), .05);
+    this.actionAge += elapsed;
     for (const actor of this.actors.values()) {
       if (!actor.model.visible) continue;
       if (actor.dragonJoints) this.restoreDragonJoints(actor);
       else this.restorePrincessHead(actor);
-      actor.mixer.update(dt);
-      if (!actor.dragonJoints) this.posePrincess(actor, dt);
-      if (actor.dragonJoints) this.poseDragon(actor, dt);
+      actor.mixer.update(elapsed);
+      if (!actor.dragonJoints) this.posePrincess(actor, elapsed);
+      if (actor.dragonJoints) this.poseDragon(actor, elapsed);
     }
-    this.updateStar(dt);
+    this.updateStar(elapsed);
     this.renderer.render(this.scene, this.camera);
     this.raf = requestAnimationFrame(this.tick);
   }
@@ -430,58 +466,58 @@ export class SharedStage {
     const behavior = this.motion.dragon || 'quiet';
     const offset = stageOffset(this.motion.stageAction, 'd', this.actionAge);
     actor.dragonPhase += dt;
-    const t = actor.dragonPhase;
+    const phase = actor.dragonPhase;
     if (this.motion.effect === 'hug' || this.motion.effect === 'curl') {
       const blend = Math.min(1, dt * 3.4);
       const x = actor.baseX + (this.motion.effect === 'hug' ? -.30 : -.08) + offset.x;
       const y = actor.baseY + (this.motion.effect === 'curl' ? -.08 : 0) + offset.y;
       actor.model.position.x += (x - actor.model.position.x) * blend;
       actor.model.position.y += (y - actor.model.position.y) * blend;
-       actor.model.position.z += (actor.baseZ + (this.motion.effect === 'hug' ? -.06 : 0) - actor.model.position.z) * blend;
+      actor.model.position.z += (actor.baseZ + (this.motion.effect === 'hug' ? -.06 : 0) - actor.model.position.z) * blend;
       actor.model.rotation.y += ((actor.targetFacing + (this.motion.effect === 'hug' ? -.4 : -.1) + offset.turn) - actor.model.rotation.y) * blend;
       actor.model.rotation.z += (offset.roll - actor.model.rotation.z) * blend;
       actor.model.rotation.x += (offset.pitch - actor.model.rotation.x) * blend;
       actor.model.updateMatrixWorld(true);
       return;
     }
-    const flap = Math.sin(t * 6.2);
-    const hop = Math.max(0, Math.sin(t * 3.4));
+    const flap = Math.sin(phase * 6.2);
+    const hop = Math.max(0, Math.sin(phase * 3.4));
     // Distinct story beats use the existing rig. The small joint limits keep the mesh intact.
-    const poses = {
+    const behaviorPoses = {
       quiet: { head: 0, wing: 0, tail: 0, lift: 0, roll: 0, pitch: 0 },
-      curious: { head: .13 * Math.sin(t * 1.1), wing: .035, tail: .08 * Math.sin(t * 1.3),
-        lift: 0, roll: .035 * Math.sin(t), pitch: 0 },
-      help: { head: .11, wing: .13, tail: .05 * Math.sin(t * 1.6), lift: .025, roll: 0, pitch: 0 },
+      curious: { head: .13 * Math.sin(phase * 1.1), wing: .035, tail: .08 * Math.sin(phase * 1.3),
+        lift: 0, roll: .035 * Math.sin(phase), pitch: 0 },
+      help: { head: .11, wing: .13, tail: .05 * Math.sin(phase * 1.6), lift: .025, roll: 0, pitch: 0 },
       protect: { head: -.12, wing: .17, tail: -.08, lift: 0, roll: 0, pitch: -.055 },
-      celebrate: { head: .07 * Math.sin(t * 2.6), wing: .10 + .15 * Math.max(0, flap),
-        tail: .12 * Math.sin(t * 3.4), lift: .17 * hop, roll: .045 * Math.sin(t * 3.4), pitch: 0 },
-      hover: { head: .04, wing: .14 + .16 * flap, tail: .08 * Math.sin(t * 2),
-        lift: .32 + .035 * Math.sin(t * 2.5), roll: .025 * Math.sin(t * 2.5), pitch: 0 },
-      hop: { head: .04 * Math.sin(t * 3.4), wing: .08 + .12 * hop, tail: .10 * Math.sin(t * 3.4),
+      celebrate: { head: .07 * Math.sin(phase * 2.6), wing: .10 + .15 * Math.max(0, flap),
+        tail: .12 * Math.sin(phase * 3.4), lift: .17 * hop, roll: .045 * Math.sin(phase * 3.4), pitch: 0 },
+      hover: { head: .04, wing: .14 + .16 * flap, tail: .08 * Math.sin(phase * 2),
+        lift: .32 + .035 * Math.sin(phase * 2.5), roll: .025 * Math.sin(phase * 2.5), pitch: 0 },
+      hop: { head: .04 * Math.sin(phase * 3.4), wing: .08 + .12 * hop, tail: .10 * Math.sin(phase * 3.4),
         lift: .22 * hop, roll: 0, pitch: -.06 * hop },
-      search: { head: .20 * Math.sin(t * 1.7), wing: .045, tail: .15 * Math.sin(t * 1.7), lift: 0,
-        roll: .06 * Math.sin(t * 1.7), pitch: .035 * Math.sin(t * 1.7) },
-      soothe: { head: .045 * Math.sin(t * 1.3), wing: -.05, tail: .04 * Math.sin(t),
-        lift: 0, roll: 0, pitch: .025 * Math.sin(t * 1.3) },
-      fly: { head: .065, wing: .20 + .24 * flap, tail: .13 * Math.sin(t * 2.7),
-        lift: .38 + .06 * Math.sin(t * 2.7), roll: .04 * Math.sin(t * 2.7), pitch: -.055 },
-      wave: { head: .055, wing: .045 + .15 * Math.sin(t * 4), tail: .08 * Math.sin(t * 4),
+      search: { head: .20 * Math.sin(phase * 1.7), wing: .045, tail: .15 * Math.sin(phase * 1.7), lift: 0,
+        roll: .06 * Math.sin(phase * 1.7), pitch: .035 * Math.sin(phase * 1.7) },
+      soothe: { head: .045 * Math.sin(phase * 1.3), wing: -.05, tail: .04 * Math.sin(phase),
+        lift: 0, roll: 0, pitch: .025 * Math.sin(phase * 1.3) },
+      fly: { head: .065, wing: .20 + .24 * flap, tail: .13 * Math.sin(phase * 2.7),
+        lift: .38 + .06 * Math.sin(phase * 2.7), roll: .04 * Math.sin(phase * 2.7), pitch: -.055 },
+      wave: { head: .055, wing: .045 + .15 * Math.sin(phase * 4), tail: .08 * Math.sin(phase * 4),
         lift: 0, roll: .025, pitch: 0 },
       rest: { head: -.11, wing: -.09, tail: -.12, lift: 0, roll: 0, pitch: .06 }
     };
-    const { head, wing, tail, lift, roll, pitch } = poses[behavior] || poses.quiet;
+    const { head, wing, tail, lift, roll, pitch } = behaviorPoses[behavior] || behaviorPoses.quiet;
     const authoredMotion = Boolean(actor.storyClip);
-    const travel = {
+    const behaviorTravel = {
       quiet: { slide: 0, turn: 0 },
-      curious: { slide: .025 * Math.sin(t * 1.3), turn: .12 * Math.sin(t * 1.3) },
+      curious: { slide: .025 * Math.sin(phase * 1.3), turn: .12 * Math.sin(phase * 1.3) },
       help: { slide: -.045, turn: -.12 },
       protect: { slide: -.085, turn: -.16 },
-      celebrate: { slide: .055 * Math.sin(t * 2.2), turn: .12 * Math.sin(t * 2.2) },
-      hover: { slide: .04 * Math.sin(t * 1.5), turn: .04 * Math.sin(t * 1.5) },
-      hop: { slide: .035 * Math.sin(t * 3.4), turn: .07 * Math.sin(t * 3.4) },
-      search: { slide: .07 * Math.sin(t * 1.7), turn: .18 * Math.sin(t * 1.7) },
+      celebrate: { slide: .055 * Math.sin(phase * 2.2), turn: .12 * Math.sin(phase * 2.2) },
+      hover: { slide: .04 * Math.sin(phase * 1.5), turn: .04 * Math.sin(phase * 1.5) },
+      hop: { slide: .035 * Math.sin(phase * 3.4), turn: .07 * Math.sin(phase * 3.4) },
+      search: { slide: .07 * Math.sin(phase * 1.7), turn: .18 * Math.sin(phase * 1.7) },
       soothe: { slide: -.025, turn: -.08 },
-      fly: { slide: .07 * Math.sin(t * .9), turn: .08 * Math.sin(t * .9) },
+      fly: { slide: .07 * Math.sin(phase * .9), turn: .08 * Math.sin(phase * .9) },
       wave: { slide: 0, turn: -.08 },
       rest: { slide: 0, turn: -.05 }
     }[behavior] || { slide: 0, turn: 0 };
@@ -491,15 +527,15 @@ export class SharedStage {
     actor.dragonValue.tail += (tail - actor.dragonValue.tail) * blend;
     actor.dragonValue.roll += (roll - actor.dragonValue.roll) * blend;
     actor.dragonValue.pitch += (pitch - actor.dragonValue.pitch) * blend;
-    actor.dragonValue.slide += (travel.slide - actor.dragonValue.slide) * blend;
-    actor.dragonValue.turn += (travel.turn - actor.dragonValue.turn) * blend;
+    actor.dragonValue.slide += (behaviorTravel.slide - actor.dragonValue.slide) * blend;
+    actor.dragonValue.turn += (behaviorTravel.turn - actor.dragonValue.turn) * blend;
     actor.dragonValue.wave += ((behavior === 'wave' ? 1 : 0) - actor.dragonValue.wave) * blend;
     const { head: headBone, wingA, wingB, tail: tailBone } = actor.dragonJoints;
     actor.model.updateMatrixWorld(true);
     const modelWorld = actor.model.getWorldQuaternion(new THREE.Quaternion());
     const wingLeft = authoredMotion ? 0 : -actor.dragonValue.wing * (1 - actor.dragonValue.wave) - .04 * actor.dragonValue.wave;
     const wingRight = authoredMotion ? 0 : actor.dragonValue.wing * (1 - actor.dragonValue.wave) +
-      (.1 + .23 * Math.sin(t * 4)) * actor.dragonValue.wave;
+      (.1 + .23 * Math.sin(phase * 4)) * actor.dragonValue.wave;
     for (const [bone, angle] of [[headBone, authoredMotion ? 0 : actor.dragonValue.head],
       [wingA, wingLeft], [wingB, wingRight],
       [tailBone, authoredMotion ? 0 : actor.dragonValue.tail]]) {

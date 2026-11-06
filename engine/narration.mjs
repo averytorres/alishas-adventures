@@ -12,17 +12,17 @@ export class NarrationController {
   }
   async play(lines) {
     this.stop();
-    const run = new AbortController();
-    this.active = run;
+    const currentRun = new AbortController();
+    this.active = currentRun;
     try {
-      for (let i = 0; i < lines.length; i++) {
-        if (run.signal.aborted) break;
-        this.highlight(i, lines[i]);
-        await this.playLine(lines[i], run.signal);
+      for (let index = 0; index < lines.length; index++) {
+        if (currentRun.signal.aborted) break;
+        this.highlight(index, lines[index]);
+        await this.playLine(lines[index], currentRun.signal);
       }
-      return !run.signal.aborted;
+      return !currentRun.signal.aborted;
     } finally {
-      if (this.active === run) {
+      if (this.active === currentRun) {
         this.active = null;
         this.highlight(null);
       }
@@ -32,27 +32,43 @@ export class NarrationController {
 
 export function playAudioUrl(url, signal, onTime) {
   return new Promise((resolve, reject) => {
-    if (signal.aborted) return resolve();
+    if (signal.aborted) {
+      resolve();
+      return;
+    }
     const audio = new Audio(url);
     let finished = false;
-    const timer = onTime ? setInterval(() => { if (!finished) onTime(audio.currentTime); }, 70) : null;
-    const done = error => {
+    const timer = onTime ? setInterval(() => {
+      if (!finished) onTime(audio.currentTime);
+    }, 70) : null;
+
+    const finish = error => {
       if (finished) return;
       finished = true;
       if (timer) clearInterval(timer);
-      signal.removeEventListener('abort', aborted);
+      signal.removeEventListener('abort', abortPlayback);
       audio.onended = null;
       audio.onerror = null;
-      audio.pause(); audio.removeAttribute('src'); audio.load();
+      audio.pause();
+      audio.removeAttribute('src');
+      audio.load();
       if (error) reject(error);
       else resolve();
     };
-    const aborted = () => done();
-    audio.onended = () => done();
-    audio.onerror = () => done(new Error(`Could not play audio: ${url}`));
-    signal.addEventListener('abort', aborted, { once: true });
-    if (signal.aborted) return aborted();
-    try { Promise.resolve(audio.play()).catch(done); }
-    catch (error) { done(error); }
+
+    const abortPlayback = () => finish();
+    audio.onended = () => finish();
+    audio.onerror = () => finish(new Error(`Could not play audio: ${url}`));
+    signal.addEventListener('abort', abortPlayback, { once: true });
+    if (signal.aborted) {
+      abortPlayback();
+      return;
+    }
+
+    try {
+      Promise.resolve(audio.play()).catch(finish);
+    } catch (error) {
+      finish(error);
+    }
   });
 }

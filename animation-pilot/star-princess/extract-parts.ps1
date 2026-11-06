@@ -1,8 +1,10 @@
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
+
 $root = $PSScriptRoot
 $sheet = [System.Drawing.Bitmap]::new((Join-Path $root 'parts-sheet-TEMP.png'))
 try {
+  # Pixel rectangles on the temporary sprite sheet: x, y, width, height.
   $parts = @{
     'body-TEMP.png'         = @(38, 0, 620, 1018)
     'arm-down-TEMP.png'     = @(645, 130, 385, 280)
@@ -31,7 +33,11 @@ try {
       }
       $piece.Save((Join-Path $root $name), [System.Drawing.Imaging.ImageFormat]::Png)
     }
-    finally { $piece.Dispose() }
+    finally {
+      $piece.Dispose()
+    }
   }
 }
-finally { $sheet.Dispose() }
+finally {
+  $sheet.Dispose()
+}

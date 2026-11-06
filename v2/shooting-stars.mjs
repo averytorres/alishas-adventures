@@ -5,14 +5,14 @@ export function shootingStarPath(width, height, random = Math.random, margin = 2
   const angle = random() * Math.PI * 2;
   const direction = { x: Math.cos(angle), y: Math.sin(angle) };
   const center = { x: width * (.15 + random() * .7), y: height * (.12 + random() * .76) };
-  const forward = Math.min(
-    direction.x > 0 ? (width + margin - center.x) / direction.x : direction.x < 0 ? (-margin - center.x) / direction.x : Infinity,
-    direction.y > 0 ? (height + margin - center.y) / direction.y : direction.y < 0 ? (-margin - center.y) / direction.y : Infinity,
+
+  // Distance from the center to the first edge beyond the viewport on each ray.
+  const distanceToEdge = (dx, dy) => Math.min(
+    dx > 0 ? (width + margin - center.x) / dx : dx < 0 ? (-margin - center.x) / dx : Infinity,
+    dy > 0 ? (height + margin - center.y) / dy : dy < 0 ? (-margin - center.y) / dy : Infinity,
   );
-  const backward = Math.min(
-    direction.x < 0 ? (width + margin - center.x) / -direction.x : direction.x > 0 ? (-margin - center.x) / -direction.x : Infinity,
-    direction.y < 0 ? (height + margin - center.y) / -direction.y : direction.y > 0 ? (-margin - center.y) / -direction.y : Infinity,
-  );
+  const forward = distanceToEdge(direction.x, direction.y);
+  const backward = distanceToEdge(-direction.x, -direction.y);
   return {
     start: { x: center.x - backward * direction.x, y: center.y - backward * direction.y },
     end: { x: center.x + forward * direction.x, y: center.y + forward * direction.y },
@@ -25,7 +25,8 @@ export function shootingStarPath(width, height, random = Math.random, margin = 2
 export function startShootingStars(star, environment = window) {
   if (!star?.animate) return () => {};
   const reduced = environment.matchMedia('(prefers-reduced-motion: reduce)');
-  let timer = null, animation = null;
+  let timer = null;
+  let animation = null;
   function stop() {
     environment.clearTimeout(timer);
     timer = null;
@@ -53,9 +54,15 @@ export function startShootingStars(star, environment = window) {
       { offset: .83, transform: pose(.83), opacity: 1 },
       { offset: 1, transform: pose(1), opacity: 0 },
     ], { duration: Math.max(1100, path.length / (650 + Math.random() * 230) * 1000), easing: 'linear' });
-    animation.onfinish = () => { animation = null; schedule(); };
+    animation.onfinish = () => {
+      animation = null;
+      schedule();
+    };
   }
-  const restart = () => { stop(); schedule(true); };
+  const restart = () => {
+    stop();
+    schedule(true);
+  };
   environment.document.addEventListener('visibilitychange', restart);
   reduced.addEventListener('change', restart);
   schedule(true);

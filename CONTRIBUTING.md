@@ -57,3 +57,21 @@ The local `android/debug.keystore` is excluded from Git. The v0.1.0 release uses
 ## Project content
 
 The story, locale, art, motion, and audio manifests are in `story/` and `audio/`; artwork is in `assets/`. The app code is in `v2/`. For optional Blender preparation and model conversion, see the [model asset notes](tools/model-assets/README.md).
+
+## Code map
+
+The Android wrapper loads `v2/index.html` and serves the bundled files from the APK. The browser preview serves the same files through `v2/dev-server.mjs`.
+
+| Area | Responsibility |
+| --- | --- |
+| `v2/content.mjs` | Lists each story's data files and combines their localized text, audio, art, covers, and motion. Add a new story here after creating its data files. |
+| `v2/app.mjs` | Builds the library, reader, and parent settings; connects story choices, narration, and the stage. |
+| `v2/state.mjs` | Saves progress and settings, resumes stories, and handles tap, hold, and speech cooldown behavior. |
+| `v2/narration.mjs` and `v2/word-highlighting.mjs` | Play recorded lines and map spoken words to the visible paragraph. |
+| `engine/` | Validates story graphs, follows choices, localizes text, and controls audio playback. |
+| `v2/shared-stage/shared-stage.source.js` | Renders the princesses and dragon and applies scene motion. The character-specific stage sources are in `v2/star-3d/` and `v2/adventure-3d/`. |
+| `production/` | Checks story coverage and prepares or generates narration. Paid audio commands require an explicit mode and a key supplied outside Git. |
+| `tools/` | Checks repository hygiene, validates model assets, and builds the 3D runtime bundles. |
+| `build-android.ps1` and `android/` | Package the offline app and provide the Android WebView and screen-pinning bridge. |
+
+The large `*-stage.mjs` runtime files are generated from nearby `*.source.js` files. Edit the source, run `npm run build:3d`, and commit the updated bundle with it. The old root `index.html`, `app.js`, and `styles.css` form an optional legacy prototype selected only by `-LegacyMvp`.

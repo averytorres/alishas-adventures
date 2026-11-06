@@ -10,14 +10,23 @@ const COVER_MS = 380;
 const REVEAL_MS = 540;
 const TAU = Math.PI * 2;
 const clamp = value => Math.max(0, Math.min(1, value));
-const ease = value => { const x = clamp(value); return x * x * (3 - 2 * x); };
+const ease = value => {
+  const x = clamp(value);
+  return x * x * (3 - 2 * x);
+};
 
 function seedStars(kind, count = 42) {
   let seed = [...kind].reduce((value, character) => (value * 33 + character.charCodeAt(0)) >>> 0, 101);
-  const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
+  const random = () => {
+    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    return seed / 4294967296;
+  };
   return Array.from({ length: count }, () => ({
-    x: random(), y: random(), size: 1.1 + random() * 2.4,
-    speed: .025 + random() * .065, phase: random() * TAU,
+    x: random(),
+    y: random(),
+    size: 1.1 + random() * 2.4,
+    speed: .025 + random() * .065,
+    phase: random() * TAU,
     warm: random() > .28
   }));
 }
@@ -32,8 +41,10 @@ function drawStar(ctx, x, y, radius, color, glow = 1) {
   for (let point = 0; point < 8; point++) {
     const angle = point * Math.PI / 4 - Math.PI / 2;
     const length = point % 2 ? radius * .2 : radius;
-    const px = Math.cos(angle) * length, py = Math.sin(angle) * length;
-    if (point === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    const px = Math.cos(angle) * length;
+    const py = Math.sin(angle) * length;
+    if (point === 0) ctx.moveTo(px, py);
+    else ctx.lineTo(px, py);
   }
   ctx.closePath();
   ctx.fill();
@@ -131,7 +142,9 @@ function paint(ctx, width, height, kind, stars, time, opacity) {
   ctx.fillRect(0, 0, width, height);
 
   ctx.globalCompositeOperation = 'screen';
-  for (let index = 0; index < 3; index++) drawRibbon(ctx, width, height, time, index, theme, kind);
+  for (let index = 0; index < 3; index++) {
+    drawRibbon(ctx, width, height, time, index, theme, kind);
+  }
   if (kind === 'cloud') drawClouds(ctx, width, height, time, theme);
   if (kind === 'star') drawOrbit(ctx, width, height, time, theme);
   for (const star of stars) {
@@ -168,12 +181,20 @@ export function createSceneTransition(kind, loadingText, options = {}) {
   const ctx = canvas.getContext('2d', { alpha: true });
   const reduced = Boolean(win.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
   const stars = seedStars(kind);
-  let width = 0, height = 0, phase = 'cover', started = 0, frame = 0, alive = true, lastFrame = -Infinity;
+  let width = 0;
+  let height = 0;
+  let phase = 'cover';
+  let started = 0;
+  let frame = 0;
+  let alive = true;
+  let lastFrame = -Infinity;
   const now = () => win.performance?.now?.() ?? Date.now();
   const resize = () => {
-    width = Math.max(1, win.innerWidth || 1); height = Math.max(1, win.innerHeight || 1);
+    width = Math.max(1, win.innerWidth || 1);
+    height = Math.max(1, win.innerHeight || 1);
     const ratio = Math.min(win.devicePixelRatio || 1, 1.25);
-    canvas.width = Math.ceil(width * ratio); canvas.height = Math.ceil(height * ratio);
+    canvas.width = Math.ceil(width * ratio);
+    canvas.height = Math.ceil(height * ratio);
     ctx?.setTransform(ratio, 0, 0, ratio, 0, 0);
   };
   function tick(timestamp) {
@@ -181,9 +202,11 @@ export function createSceneTransition(kind, loadingText, options = {}) {
     if (timestamp - lastFrame >= 30 || reduced) {
       lastFrame = timestamp;
       const elapsed = timestamp - started;
-      const opacity = reduced ? (phase === 'reveal' ? 0 : 1)
-        : phase === 'cover' ? ease(elapsed / COVER_MS)
-          : phase === 'hold' ? 1 : 1 - ease(elapsed / REVEAL_MS);
+      let opacity;
+      if (reduced) opacity = phase === 'reveal' ? 0 : 1;
+      else if (phase === 'cover') opacity = ease(elapsed / COVER_MS);
+      else if (phase === 'hold') opacity = 1;
+      else opacity = 1 - ease(elapsed / REVEAL_MS);
       paint(ctx, width, height, kind, stars, timestamp / 1000, opacity);
     }
     if (!reduced && (phase !== 'reveal' || timestamp - started < REVEAL_MS)) {
@@ -200,11 +223,15 @@ export function createSceneTransition(kind, loadingText, options = {}) {
   return {
     element, waiting,
     fullyCover() {
-      phase = 'hold'; element.dataset.phase = phase;
+      phase = 'hold';
+      element.dataset.phase = phase;
       if (ctx) paint(ctx, width, height, kind, stars, now() / 1000, 1);
     },
     reveal() {
-      phase = 'reveal'; element.dataset.phase = phase; started = now(); lastFrame = -Infinity;
+      phase = 'reveal';
+      element.dataset.phase = phase;
+      started = now();
+      lastFrame = -Infinity;
       if (ctx && reduced) paint(ctx, width, height, kind, stars, started / 1000, 0);
     },
     remove() {

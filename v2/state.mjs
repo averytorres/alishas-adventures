@@ -20,15 +20,21 @@ export function readSavedState(storage, key = STORAGE_KEY) {
 }
 
 export function writeSavedState(storage, value, key = STORAGE_KEY) {
-  try { storage.setItem(key, JSON.stringify(value)); return true; }
-  catch { return false; }
+  try {
+    storage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export function normalizeState(value, stories) {
   const progress = {};
   for (const story of stories) {
     const scene = value?.progress?.[story.id];
-    if (typeof scene === 'string' && story.scenes[scene]) progress[story.id] = scene;
+    if (typeof scene === 'string' && story.scenes[scene]) {
+      progress[story.id] = scene;
+    }
   }
   return {
     language: LANGUAGES.includes(value?.language) ? value.language : 'en',
@@ -43,7 +49,9 @@ export function startOrResume(story, progress, restart = false) {
 
 export function advance(session, index, story, progress) {
   const result = session.choose(index);
-  if (result.action === 'scene') progress[story.id] = result.id;
+  if (result.action === 'scene') {
+    progress[story.id] = result.id;
+  }
   return result;
 }
 
@@ -77,25 +85,86 @@ export function choiceScrollDelta(rect, stageBottom, viewportHeight) {
 }
 
 export function makeHoldHandler({ onHold, onTap, delay = 550 }) {
-  let timer = null, held = false, canceled = false, tracking = false, pointerId = null, startX = 0, startY = 0;
-  const clear = () => { if (timer) clearTimeout(timer); timer = null; };
-  const samePointer = event => pointerId === null || event.pointerId === undefined || event.pointerId === pointerId;
+  let timer = null;
+  let held = false;
+  let canceled = false;
+  let tracking = false;
+  let pointerId = null;
+  let startX = 0;
+  let startY = 0;
+
+  function clearTimer() {
+    if (timer) clearTimeout(timer);
+    timer = null;
+  }
+
+  function isSamePointer(event) {
+    return pointerId === null || event.pointerId === undefined || event.pointerId === pointerId;
+  }
+
   return {
     pointerdown(event) {
       if (event.button !== undefined && event.button !== 0) return;
-      if (event.isPrimary === false || tracking) { tracking = false; canceled = true; clear(); return; }
-      clear(); held = false; canceled = false; tracking = true; pointerId = event.pointerId ?? null; startX = event.clientX; startY = event.clientY;
-      timer = setTimeout(() => { if (tracking) { held = true; onHold(); } }, delay);
+      if (event.isPrimary === false || tracking) {
+        tracking = false;
+        canceled = true;
+        clearTimer();
+        return;
+      }
+      clearTimer();
+      held = false;
+      canceled = false;
+      tracking = true;
+      pointerId = event.pointerId ?? null;
+      startX = event.clientX;
+      startY = event.clientY;
+      timer = setTimeout(() => {
+        if (tracking) {
+          held = true;
+          onHold();
+        }
+      }, delay);
     },
     pointermove(event) {
-      if (tracking && samePointer(event) && Math.hypot(event.clientX - startX, event.clientY - startY) > 12) { tracking = false; canceled = true; clear(); }
+      if (tracking && isSamePointer(event) && Math.hypot(event.clientX - startX, event.clientY - startY) > 12) {
+        tracking = false;
+        canceled = true;
+        clearTimer();
+      }
     },
-    pointerup(event) { if (samePointer(event)) { tracking = false; pointerId = null; clear(); } },
-    pointercancel(event) { if (samePointer(event)) { tracking = false; pointerId = null; clear(); canceled = true; } },
+    pointerup(event) {
+      if (isSamePointer(event)) {
+        tracking = false;
+        pointerId = null;
+        clearTimer();
+      }
+    },
+    pointercancel(event) {
+      if (isSamePointer(event)) {
+        tracking = false;
+        pointerId = null;
+        clearTimer();
+        canceled = true;
+      }
+    },
     click(event) {
-      if (event.detail === 0) { held = false; canceled = false; onTap(); return; }
-      if (held || canceled) { event.preventDefault(); event.stopPropagation(); held = false; canceled = false; } else onTap();
+      if (event.detail === 0) {
+        held = false;
+        canceled = false;
+        onTap();
+        return;
+      }
+      if (held || canceled) {
+        event.preventDefault();
+        event.stopPropagation();
+        held = false;
+        canceled = false;
+      } else {
+        onTap();
+      }
     },
-    contextmenu(event) { event.preventDefault(); }
+    contextmenu(event) {
+      event.preventDefault();
+    }
   };
 }

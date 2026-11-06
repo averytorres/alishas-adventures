@@ -1,19 +1,42 @@
 import fs from 'node:fs';
 import { validateStory, countNarrationCharacters, narrationSequence } from './story.mjs';
-const path = process.argv[2];
-if (!path) throw new Error('Usage: node analyze-story.mjs story.json');
-const story = JSON.parse(fs.readFileSync(path, 'utf8'));
+
+const inputPath = process.argv[2];
+if (!inputPath) throw new Error('Usage: node analyze-story.mjs story.json');
+
+const story = JSON.parse(fs.readFileSync(inputPath, 'utf8'));
 const problems = validateStory(story);
 if (problems.length) throw new Error(problems.join('\n'));
+
 const routes = [];
-function visit(id, visited, chars) {
-  if (visited.includes(id)) return;
+function visit(id, visited, characterCount) {
+  if (visited.includes(id)) return; // A route cannot revisit a scene.
+
   const scene = story.scenes[id];
-  const total = chars + narrationSequence(scene).reduce((sum, line) => sum + line.length, 0);
-  if (scene.ending) { routes.push({ ids: [...visited, id], chars: total, ending: scene.ending }); return; }
-  for (const choice of scene.choices) if (story.scenes[choice.next]) visit(choice.next, [...visited, id], total);
+  const sceneCharacters = narrationSequence(scene).reduce((sum, line) => sum + line.length, 0);
+  const total = characterCount + sceneCharacters;
+
+  if (scene.ending) {
+    routes.push({ ids: [...visited, id], chars: total, ending: scene.ending });
+    return;
+  }
+
+  for (const choice of scene.choices) {
+    if (story.scenes[choice.next]) visit(choice.next, [...visited, id], total);
+  }
 }
+
 visit(story.start, [], 0);
-routes.sort((a, b) => a.chars - b.chars);
-const chars = countNarrationCharacters(story);
-console.log(JSON.stringify({story:story.id, scenes:Object.keys(story.scenes).length, uniqueEnglishCharacters:chars, roughThreeLanguageCreditsAtOnePerCharacter:chars*3, routeCount:routes.length, shortestRoute:routes[0], longestRoute:routes.at(-1)},null,2));
+routes.sort((first, second) => first.chars - second.chars);
+
+const uniqueEnglishCharacters = countNarrationCharacters(story);
+const analysis = {
+  story: story.id,
+  scenes: Object.keys(story.scenes).length,
+  uniqueEnglishCharacters,
+  roughThreeLanguageCreditsAtOnePerCharacter: uniqueEnglishCharacters * 3,
+  routeCount: routes.length,
+  shortestRoute: routes[0],
+  longestRoute: routes.at(-1)
+};
+console.log(JSON.stringify(analysis, null, 2));

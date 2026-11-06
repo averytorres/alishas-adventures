@@ -7,7 +7,7 @@ const app = readFileSync(new URL('./app.mjs', import.meta.url), 'utf8');
 const styles = readFileSync(new URL('./styles.css', import.meta.url), 'utf8');
 const effects = readFileSync(new URL('./transition-effects.mjs', import.meta.url), 'utf8');
 const routeCode = app.match(/const transitionKinds = \[[^\n]+\];[\s\S]*?(?=function motionDelay)/)?.[0];
-const chooseCode = app.match(/async function choose\(index\) \{[\s\S]*?\n\}(?=\nfunction renderReader)/)?.[0];
+const chooseCode = app.match(/async function choose\(index\) \{[\s\S]*?\n\}(?=\n(?:function|async function) )/)?.[0];
 assert.ok(routeCode && chooseCode, 'transition functions remain available in app.mjs');
 
 test('the same route keeps its style and different routes use all three styles', () => {

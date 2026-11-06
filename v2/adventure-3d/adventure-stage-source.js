@@ -1,8 +1,19 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-let renderer, canvas, scene, camera, mixer, model, clips, action, currentName, idleAction;
-let activeStage, loading, talking = false;
+let renderer;
+let canvas;
+let scene;
+let camera;
+let mixer;
+let model;
+let clips;
+let action;
+let currentName;
+let idleAction;
+let activeStage;
+let loading;
+let talking = false;
 let sceneMotion = { talk: 'Talk_with_Hands_Open', facing: 0 };
 let targetFacing = 0;
 const BLEND_SECONDS = .55;
@@ -23,7 +34,10 @@ function resize() {
 }
 
 function play(name, once = false) {
-  if (name === 'Idle_7') { stopGesture(); return; }
+  if (name === 'Idle_7') {
+    stopGesture();
+    return;
+  }
   if (!mixer || !clips?.has(name) || currentName === name) return;
   const next = mixer.clipAction(clips.get(name));
   if (action) action.fadeOut(BLEND_SECONDS);
@@ -42,10 +56,10 @@ function stopGesture() {
 
 function frame() {
   requestAnimationFrame(frame);
-  const dt = clock.getDelta();
+  const elapsed = clock.getDelta();
   if (!activeStage?.isConnected || !renderer || !model) return;
-  mixer.update(Math.min(dt, .05));
-  model.rotation.y += (targetFacing - model.rotation.y) * Math.min(1, dt * 4);
+  mixer.update(Math.min(elapsed, .05));
+  model.rotation.y += (targetFacing - model.rotation.y) * Math.min(1, elapsed * 4);
   renderer.render(scene, camera);
 }
 
@@ -67,7 +81,13 @@ async function loadModel() {
     if (part.name === 'Icosphere') part.visible = false;
     if (!part.isMesh || part.name === 'Icosphere') return;
     const original = part.material;
-    const flat = new THREE.MeshBasicMaterial({ map: original.map, color: original.color, side: original.side, transparent: original.transparent, alphaTest: original.alphaTest });
+    const flat = new THREE.MeshBasicMaterial({
+      map: original.map,
+      color: original.color,
+      side: original.side,
+      transparent: original.transparent,
+      alphaTest: original.alphaTest
+    });
     flat.toneMapped = false;
     part.material = flat;
   });
@@ -118,7 +138,11 @@ export function setTalking(value) {
 }
 
 export function setSceneMotion(motion) {
-  const allowed = ['Idle_7', 'Talk_with_Hands_Open', 'Talk_with_Left_Hand_Raised', 'Talk_with_Right_Hand_Open', 'Talk_Passionately', 'Shrug', 'Confused_Scratch', 'Finger_Wag_No'];
+  const allowed = [
+    'Idle_7', 'Talk_with_Hands_Open', 'Talk_with_Left_Hand_Raised',
+    'Talk_with_Right_Hand_Open', 'Talk_Passionately', 'Shrug',
+    'Confused_Scratch', 'Finger_Wag_No'
+  ];
   sceneMotion = {
     talk: allowed.includes(motion?.talk) ? motion.talk : 'Talk_with_Hands_Open',
     facing: Math.max(-0.25, Math.min(0.25, Number(motion?.facing) || 0))

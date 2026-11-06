@@ -1,10 +1,15 @@
 import { localizeStory } from '../engine/localize-story.mjs';
 import { narrationSequence } from '../engine/story.mjs';
-import { browserStorage, normalizeState, readSavedState, writeSavedState, startOrResume, advance, makeHoldHandler, makeSpeechCooldown, narrationCoverageMessage, narrationStatus, choiceScrollDelta } from './state.mjs';
+import {
+  browserStorage, normalizeState, readSavedState, writeSavedState,
+  startOrResume, advance, makeHoldHandler, makeSpeechCooldown,
+  narrationCoverageMessage, narrationStatus, choiceScrollDelta
+} from './state.mjs';
 import { createNarrator } from './narration.mjs';
 import { wordParts, timedWordsFor } from './word-highlighting.mjs';
 import { SharedStage } from './shared-stage/shared-stage.mjs';
 import { createSceneTransition } from './transition-effects.mjs';
+import { loadContent } from './content.mjs';
 
 const root = document.querySelector('#app');
 const overlay = document.querySelector('#overlay-root');
@@ -12,7 +17,12 @@ const portrait = {
   adventure: { src: '../assets/princess-adventure.png', name: 'Adventurer' },
   star: { src: '../assets/princess-star.png', name: 'Star Princess' }
 };
-let baseStories = [], story, ui, state, session, narrator, screen = 'library', audioManifest = {}, wordTimings = {}, sceneArt = {}, libraryCovers = {}, bodyMotion = {};
+let baseStories = [];
+let story, ui, state, session, narrator;
+let screen = 'library';
+let audioManifest = {}, wordTimings = {};
+let sceneArt = {}, libraryCovers = {}, bodyMotion = {};
+let localeContent = {}, uiContent = {};
 const sharedStage = new SharedStage({
   princessUrls: { star: './star-3d/model.glb', adventure: './adventure-3d/model.glb' },
   dragonUrl: './dragon-3d/context-actions.glb',
@@ -54,30 +64,58 @@ const saveWarning = {
   gu: 'હમણાં આ ઉપકરણમાં તમારી પ્રગતિ સાચવી શકાતી નથી.'
 };
 const extraUi = {
-  en: { brand: 'Alisha’s Adventures', choose: 'Choose an adventure', picture: 'Princess Alisha portrait', open: 'Open story; hold to hear about it', repeatSituation: 'Hear the situation again' },
-  es: { brand: 'Las aventuras de Alisha', choose: 'Elige una aventura', picture: 'Retrato de la princesa Alisha', open: 'Abrir la historia; mantener pulsado para escuchar de qué trata', repeatSituation: 'Escuchar solo la situación' },
-  gu: { brand: 'આલીશાની સાહસકથાઓ', choose: 'એક સાહસકથા પસંદ કરો', picture: 'રાજકુમારી આલીશાનું ચિત્ર', open: 'વાર્તા ખોલો; તે વિશે સાંભળવા દબાવી રાખો', repeatSituation: 'આ વાર્તાનો ભાગ ફરી સાંભળો' }
+  en: {
+    brand: 'Alisha’s Adventures',
+    choose: 'Choose an adventure',
+    picture: 'Princess Alisha portrait',
+    open: 'Open story; hold to hear about it',
+    repeatSituation: 'Hear the situation again'
+  },
+  es: {
+    brand: 'Las aventuras de Alisha',
+    choose: 'Elige una aventura',
+    picture: 'Retrato de la princesa Alisha',
+    open: 'Abrir la historia; mantener pulsado para escuchar de qué trata',
+    repeatSituation: 'Escuchar solo la situación'
+  },
+  gu: {
+    brand: 'આલીશાની સાહસકથાઓ',
+    choose: 'એક સાહસકથા પસંદ કરો',
+    picture: 'રાજકુમારી આલીશાનું ચિત્ર',
+    open: 'વાર્તા ખોલો; તે વિશે સાંભળવા દબાવી રાખો',
+    repeatSituation: 'આ વાર્તાનો ભાગ ફરી સાંભળો'
+  }
 };
 
 function node(tag, className, text) {
-  const el = document.createElement(tag);
-  if (className) el.className = className;
-  if (text !== undefined) el.textContent = text;
-  return el;
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (text !== undefined) element.textContent = text;
+  return element;
 }
 function button(label, action, className = '') {
-  const el = node('button', className, label);
-  el.type = 'button'; el.addEventListener('click', action); return el;
+  const element = node('button', className, label);
+  element.type = 'button';
+  element.addEventListener('click', action);
+  return element;
 }
 const speechCooldown = makeSpeechCooldown;
 function image(princess, label) {
-  const img = node('img', 'portrait'); img.src = portrait[princess].src;
-  img.alt = label || `Portrait of ${portrait[princess].name}`;
-  return img;
+  const portraitImage = node('img', 'portrait');
+  portraitImage.src = portrait[princess].src;
+  portraitImage.alt = label || `Portrait of ${portrait[princess].name}`;
+  return portraitImage;
 }
-function save() { saveFailed = !writeSavedState(browserStorage(window), state); }
+function save() {
+  saveFailed = !writeSavedState(browserStorage(window), state);
+}
 function linesForScene(id, current) {
-  return [{ id: `${id}.situation`, text: current.situation }, ...current.choices.map((choice, index) => ({ id: `${id}.choice.${index}`, text: choice.text }))];
+  const situation = { id: `${id}.situation`, text: current.situation };
+  const choices = current.choices.map((choice, index) => ({
+    id: `${id}.choice.${index}`,
+    text: choice.text
+  }));
+  return [situation, ...choices];
 }
 function announceStatus(message) {
   const status = document.querySelector('#narration-status');
@@ -136,7 +174,14 @@ function highlightWord(position) {
 }
 function setNarrator() {
   narrator?.stop();
-  narrator = createNarrator({ language: state.language, audioManifest, wordTimings, onHighlight: highlight, onWord: highlightWord, onStatus: announceStatus });
+  narrator = createNarrator({
+    language: state.language,
+    audioManifest,
+    wordTimings,
+    onHighlight: highlight,
+    onWord: highlightWord,
+    onStatus: announceStatus
+  });
 }
 function attachHold(el, onHold, onTap) {
   const handlers = makeHoldHandler({ onHold, onTap });
@@ -160,49 +205,76 @@ function statusBox(ids) {
   el.hidden = !el.textContent;
   return el;
 }
-function warmPrincess(key) { return sharedStage.preload(key); }
-function renderLibrary(announce = true) {
-  root.replaceChildren(); root.append(statusBox(['library.instruction', ...baseStories.map(item => `${item.id}.description`)]));
+function warmPrincess(key) {
+  return sharedStage.preload(key);
+}
+
+function createLibraryIntro() {
   const intro = node('section', 'library-intro');
   const introHeading = node('div', 'library-intro-heading');
   introHeading.append(node('h1', '', extraUi[state.language].choose), button('⚙  Parents', openGate, 'quiet'));
   intro.append(introHeading);
-  intro.append(button('🔊  ' + ui['library.instruction'], speechCooldown(() => narrator.play([{ id: 'library.instruction', text: ui['library.instruction'] }])), 'small-speaker'));
-  root.append(intro);
-  const shelf = node('section', 'story-shelf'); shelf.setAttribute('aria-label', 'Story library');
-  for (const base of baseStories) {
-    const localized = localizeStory(base, localeContent[state.language]);
-    const card = node('article', 'story-card');
-    const art = node('div', 'story-art');
-    const coverPath = libraryCovers[base.id]?.[state.princess];
-    if (coverPath) {
-      const cover = node('img', 'story-cover'); cover.src = coverPath; cover.alt = localized.title; cover.loading = 'lazy';
-      art.append(cover);
-    } else art.append(image(state.princess, extraUi[state.language].picture));
-    const text = node('div', 'story-card-text');
-    text.append(node('h2', '', localized.title), node('p', '', localized.description));
-    const saved = state.progress[base.id];
-    const hasStarted = Boolean(saved && saved !== base.start);
-    const controls = node('div', 'card-actions');
-    const start = button(hasStarted ? ui['library.resume'] : ui['library.start'], () => openStory(base.id), 'primary');
-    // The large art action and separate speaker action never share a click target.
-    const artAction = button(extraUi[state.language].open, () => {}, 'art-action');
-    artAction.setAttribute('aria-label', `${localized.title}. ${extraUi[state.language].open}`);
-    art.append(artAction);
-    attachHold(artAction, speechCooldown(() => narrator.play([{ id: `${base.id}.description`, text: localized.description }])), () => openStory(base.id));
-    controls.append(start);
-    if (hasStarted) controls.append(button('↺  ' + ui['library.restart'], () => openStory(base.id, true), 'quiet restart-story'));
-    controls.append(button('🔊  ' + ui['library.storySpeaker'], speechCooldown(() => narrator.play([{ id: `${base.id}.description`, text: localized.description }])), 'small-speaker'));
-    card.append(art, text, controls); shelf.append(card);
+  const instruction = { id: 'library.instruction', text: ui['library.instruction'] };
+  intro.append(button('🔊  ' + instruction.text, speechCooldown(() => narrator.play([instruction])), 'small-speaker'));
+  return intro;
+}
+
+function createStoryCard(base) {
+  const localized = localizeStory(base, localeContent[state.language]);
+  const description = { id: `${base.id}.description`, text: localized.description };
+  const card = node('article', 'story-card');
+  const art = node('div', 'story-art');
+  const coverPath = libraryCovers[base.id]?.[state.princess];
+
+  if (coverPath) {
+    const cover = node('img', 'story-cover');
+    cover.src = coverPath;
+    cover.alt = localized.title;
+    cover.loading = 'lazy';
+    art.append(cover);
+  } else {
+    art.append(image(state.princess, extraUi[state.language].picture));
   }
+
+  // The large art action and separate speaker action never share a click target.
+  const artAction = button(extraUi[state.language].open, () => {}, 'art-action');
+  artAction.setAttribute('aria-label', `${localized.title}. ${extraUi[state.language].open}`);
+  attachHold(artAction, speechCooldown(() => narrator.play([description])), () => openStory(base.id));
+  art.append(artAction);
+
+  const text = node('div', 'story-card-text');
+  text.append(node('h2', '', localized.title), node('p', '', localized.description));
+
+  const savedScene = state.progress[base.id];
+  const hasStarted = Boolean(savedScene && savedScene !== base.start);
+  const controls = node('div', 'card-actions');
+  controls.append(button(hasStarted ? ui['library.resume'] : ui['library.start'], () => openStory(base.id), 'primary'));
+  if (hasStarted) {
+    controls.append(button('↺  ' + ui['library.restart'], () => openStory(base.id, true), 'quiet restart-story'));
+  }
+  controls.append(button('🔊  ' + ui['library.storySpeaker'], speechCooldown(() => narrator.play([description])), 'small-speaker'));
+  card.append(art, text, controls);
+  return card;
+}
+
+function preloadLibraryCharacters() {
+  if (screen !== 'library') return;
+  warmPrincess(state.princess).catch(error => console.error('Princess preload failed:', error));
+  sharedStage.preload('dragon').catch(error => console.error('Dragon preload failed:', error));
+}
+
+function renderLibrary(announce = true) {
+  const descriptionIds = baseStories.map(item => `${item.id}.description`);
+  root.replaceChildren(statusBox(['library.instruction', ...descriptionIds]), createLibraryIntro());
+
+  const shelf = node('section', 'story-shelf');
+  shelf.setAttribute('aria-label', 'Story library');
+  for (const base of baseStories) shelf.append(createStoryCard(base));
   root.append(shelf);
+
   if (announce) narrator.play([{ id: 'library.instruction', text: ui['library.instruction'] }]);
   // Begin preparing the selected model while the child browses the story card.
-  window.setTimeout(() => {
-    if (screen !== 'library') return;
-    warmPrincess(state.princess).catch(error => console.error('Princess preload failed:', error));
-    sharedStage.preload('dragon').catch(error => console.error('Dragon preload failed:', error));
-  }, 250);
+  window.setTimeout(preloadLibraryCharacters, 250);
 }
 async function openStory(id, restart = false) {
   if (openingStory) return;
@@ -210,33 +282,51 @@ async function openStory(id, restart = false) {
   root.querySelector('.story-preparing')?.remove();
   const preparing = node('div', 'story-preparing', princessLoadText[state.language].loading);
   preparing.setAttribute('role', 'status');
-  let shown = false, loadFailed = false;
-  const showAfter = window.setTimeout(() => { if (openingStory && screen === 'library') { root.append(preparing); shown = true; } }, 180);
+  let shown = false;
+  let loadFailed = false;
+  const showAfter = window.setTimeout(() => {
+    if (openingStory && screen === 'library') {
+      root.append(preparing);
+      shown = true;
+    }
+  }, 180);
+
   try {
     const base = baseStories.find(item => item.id === id);
     if (!base) throw new Error(`Unknown story: ${id}`);
     const nextStory = localizeStory(base, localeContent[state.language]);
     const nextSession = startOrResume(nextStory, state.progress, restart);
+
     // Keep the library visible until the characters for the first scene are ready.
     await warmPrincess(state.princess);
     if (/\bdragon\b/i.test(base.scenes[nextSession.id].situation)) {
       await sharedStage.preload('dragon').catch(error => console.error('Dragon preload failed:', error));
     }
-    story = nextStory; session = nextSession;
-    state.progress[id] = session.id; save();
-    screen = 'reader'; render(); window.scrollTo(0, 0);
+    story = nextStory;
+    session = nextSession;
+    state.progress[id] = session.id;
+    save();
+    screen = 'reader';
+    render();
+    window.scrollTo(0, 0);
   } catch (error) {
     console.error('Story could not open:', error);
     loadFailed = true;
     const recovery = node('div', 'story-load-recovery');
     recovery.append(
       node('p', '', princessLoadText[state.language].failed),
-      button(princessLoadText[state.language].retry, () => { preparing.remove(); openStory(id, restart); }, 'primary'),
+      button(princessLoadText[state.language].retry, () => {
+        preparing.remove();
+        openStory(id, restart);
+      }, 'primary'),
       button(princessLoadText[state.language].back, () => preparing.remove(), 'quiet')
     );
     preparing.replaceChildren(recovery);
     preparing.setAttribute('role', 'alert');
-    if (!shown) { root.append(preparing); shown = true; }
+    if (!shown) {
+      root.append(preparing);
+      shown = true;
+    }
   } finally {
     window.clearTimeout(showAfter);
     if (shown && !loadFailed) preparing.remove();
@@ -251,7 +341,10 @@ async function choose(index) {
   const destination = session.scene.choices[index].next;
   const transition = createSceneTransition(transitionForRoute(story.id, from, index, destination), princessLoadText[state.language].loading);
   document.body.append(transition.element);
-  const waitingTimer = window.setTimeout(() => { transition.waiting.hidden = false; transition.element.removeAttribute('aria-hidden'); }, 900);
+  const waitingTimer = window.setTimeout(() => {
+    transition.waiting.hidden = false;
+    transition.element.removeAttribute('aria-hidden');
+  }, 900);
   try {
     await motionDelay(380);
     transition.fullyCover();
@@ -272,48 +365,141 @@ async function choose(index) {
       const lines = linesForScene(session.id, session.scene);
       narrator.play(lines).then(played => {
         const stage = document.querySelector('.stage');
-        if (played && !narrator.isPlaying() && session.scene.ending && stage?.classList.contains('shared-3d-ready')) sharedStage.celebrate();
+        if (played && !narrator.isPlaying() && session.scene.ending && stage?.classList.contains('shared-3d-ready')) {
+          sharedStage.celebrate();
+        }
       });
-    } else narrator.play([{ id: 'library.instruction', text: ui['library.instruction'] }]);
+    } else {
+      narrator.play([{ id: 'library.instruction', text: ui['library.instruction'] }]);
+    }
   } finally {
     window.clearTimeout(waitingTimer);
     transition.remove();
     changingScene = false;
   }
 }
-function renderReader(announce = true) {
-  const current = session.scene, id = session.id, lines = linesForScene(id, current);
-  root.replaceChildren(); root.append(header(story.title, true), statusBox([...lines.map(line => line.id), `${id}.hint`]));
-  const stage = node('section', 'stage');
-  const art = sceneArt[id];
-  if (art) {
-    stage.classList.add('illustrated-stage');
-    stage.style.backgroundImage = `url('${art.background}')`;
-    stage.style.backgroundPosition = art.backgroundPosition;
-    if (art.character) {
-      const character = node('img', 'story-character');
-      character.src = art.character;
-      character.alt = '';
-      character.style.left = art.characterLeft || '10%';
-      character.style.bottom = art.characterBottom || '12%';
-      stage.append(character);
-    }
-    for (const actor of art.characters || []) {
-      const character = node('img', 'story-character');
-      character.src = actor.src;
-      character.alt = '';
-      character.style.left = actor.left || '10%';
-      character.style.bottom = actor.bottom || '12%';
-      if (actor.height) character.style.height = actor.height;
-      if (actor.maxWidth) character.style.maxWidth = actor.maxWidth;
-      if (actor.float) character.classList.add('story-character--float');
-      stage.append(character);
-    }
-    if (art.dragon) {
-      const dragon = node('img', 'dragon-study'); dragon.src = art.dragon; dragon.alt = '';
-      stage.append(dragon);
-    }
+
+function addSceneIllustrations(stage, art) {
+  if (!art) return;
+
+  stage.classList.add('illustrated-stage');
+  stage.style.backgroundImage = `url('${art.background}')`;
+  stage.style.backgroundPosition = art.backgroundPosition;
+
+  if (art.character) {
+    const character = node('img', 'story-character');
+    character.src = art.character;
+    character.alt = '';
+    character.style.left = art.characterLeft || '10%';
+    character.style.bottom = art.characterBottom || '12%';
+    stage.append(character);
   }
+
+  for (const actor of art.characters || []) {
+    const character = node('img', 'story-character');
+    character.src = actor.src;
+    character.alt = '';
+    character.style.left = actor.left || '10%';
+    character.style.bottom = actor.bottom || '12%';
+    if (actor.height) character.style.height = actor.height;
+    if (actor.maxWidth) character.style.maxWidth = actor.maxWidth;
+    if (actor.float) character.classList.add('story-character--float');
+    stage.append(character);
+  }
+
+  if (art.dragon) {
+    const dragon = node('img', 'dragon-study');
+    dragon.src = art.dragon;
+    dragon.alt = '';
+    stage.append(dragon);
+  }
+}
+
+function createSituationButton(situationText, line) {
+  let coolingDown = false;
+  const situation = button(situationText, async () => {
+    if (coolingDown || narrator.isPlaying()) return;
+    coolingDown = true;
+    situation.disabled = true;
+    try {
+      await narrator.play([line]);
+    } finally {
+      window.setTimeout(() => {
+        coolingDown = false;
+        situation.disabled = false;
+      }, 1500);
+    }
+  }, 'situation tap-to-hear');
+
+  situation.dataset.lineIndex = '0';
+  situation.dataset.lineId = line.id;
+  situation.setAttribute('aria-label', `${extraUi[state.language].repeatSituation}: ${situationText}`);
+
+  if (timedWordsFor(line, wordTimings[state.language]?.[line.id])) {
+    situation.dataset.wordTimingId = line.id;
+    let wordIndex = 0;
+    const parts = wordParts(situationText).map(part => {
+      if (/^\s+$/u.test(part)) return document.createTextNode(part);
+      const span = node('span', 'spoken-word', part);
+      span.dataset.wordIndex = String(wordIndex++);
+      return span;
+    });
+    situation.replaceChildren(...parts);
+  }
+
+  return situation;
+}
+
+function createReaderControls(situation, lines, sceneId, current) {
+  const actions = node('div', 'reader-actions');
+  const help = node('p', 'hint', current.hint);
+  help.hidden = true;
+
+  const replay = button('🔊  ' + ui['player.replayShort'], speechCooldown(async () => {
+    situation.hidden = false;
+    situation.scrollTop = 0;
+    const played = await narrator.play(lines);
+    if (!played && situation.isConnected) situation.hidden = false;
+  }), 'secondary');
+  replay.setAttribute('aria-label', ui['player.replay']);
+
+  const helpButton = button('💡  ' + ui['player.helpShort'], speechCooldown(() => {
+    narrator.stop();
+    help.hidden = !help.hidden;
+    if (!help.hidden) narrator.play([{ id: `${sceneId}.hint`, text: current.hint }]);
+  }), 'secondary');
+  helpButton.setAttribute('aria-label', ui['player.help']);
+
+  actions.append(replay, helpButton);
+  return { actions, help };
+}
+
+function createChoices(current, lines) {
+  const choices = node('div', 'choices');
+  current.choices.forEach((choice, index) => {
+    const line = lines[index + 1];
+    const row = node('div', 'choice-row');
+    const chooseButton = button(choice.text, () => {}, 'choice-select');
+    chooseButton.dataset.lineIndex = String(index + 1);
+    chooseButton.dataset.lineId = line.id;
+    chooseButton.setAttribute('aria-label', choice.text);
+    attachHold(chooseButton, speechCooldown(() => narrator.play([line])), () => choose(index));
+
+    const speaker = button('🔊', speechCooldown(() => narrator.play([line])), 'choice-speaker');
+    speaker.setAttribute('aria-label', `${ui['player.choiceSpeaker']}: ${choice.text}`);
+    row.append(chooseButton, speaker);
+    choices.append(row);
+  });
+  return choices;
+}
+
+function renderReader(announce = true) {
+  const current = session.scene;
+  const id = session.id;
+  const lines = linesForScene(id, current);
+  root.replaceChildren(header(story.title, true), statusBox([...lines.map(line => line.id), `${id}.hint`]));
+  const stage = node('section', 'stage');
+  addSceneIllustrations(stage, sceneArt[id]);
   const loading = node('span', 'character-loading', '✦');
   loading.setAttribute('role', 'status');
   loading.setAttribute('aria-label', princessLoadText[state.language].loading);
@@ -325,82 +511,44 @@ function renderReader(announce = true) {
   const oldDragon = stage.querySelector('.dragon-study');
   if (oldDragon) oldDragon.hidden = !showDragon;
   sharedStage.setSceneMotion(bodyMotion.scenes?.[id] || bodyMotion.default || {});
-  sceneReady = sharedStage.mount(stage, { princess: princessKey, dragon: showDragon }).then(result => {
-    if (!stage.isConnected || state.princess !== princessKey || result?.stale) return;
-    stage.classList.add('shared-3d-ready');
-    sharedStage.setTalking(stage.classList.contains('narrating'));
-  }).catch(error => {
-    console.error(`${princessKey} shared 3D stage failed:`, error);
-    if (stage.isConnected) {
-      loading.textContent = princessLoadText[state.language].failed;
-      loading.setAttribute('aria-label', princessLoadText[state.language].failed);
-      loading.classList.add('failed');
-    }
-  }).then(() => new Promise(resolve => {
-    window.requestAnimationFrame(() => { curtain.remove(); resolve(); });
-  }));
-  if (announce) sceneReady.then(() => {
-    if (!stage.isConnected) return;
-    narrator.play(lines).then(played => {
-      if (played && !narrator.isPlaying() && current.ending && stage.isConnected && stage.classList.contains('shared-3d-ready')) sharedStage.celebrate();
+  sceneReady = sharedStage.mount(stage, { princess: princessKey, dragon: showDragon })
+    .then(result => {
+      if (!stage.isConnected || state.princess !== princessKey || result?.stale) return;
+      stage.classList.add('shared-3d-ready');
+      sharedStage.setTalking(stage.classList.contains('narrating'));
+    })
+    .catch(error => {
+      console.error(`${princessKey} shared 3D stage failed:`, error);
+      if (stage.isConnected) {
+        loading.textContent = princessLoadText[state.language].failed;
+        loading.setAttribute('aria-label', princessLoadText[state.language].failed);
+        loading.classList.add('failed');
+      }
+    })
+    .then(() => new Promise(resolve => {
+      window.requestAnimationFrame(() => {
+        curtain.remove();
+        resolve();
+      });
+    }));
+
+  if (announce) {
+    sceneReady.then(() => {
+      if (!stage.isConnected) return;
+      narrator.play(lines).then(played => {
+        if (played && !narrator.isPlaying() && current.ending && stage.isConnected && stage.classList.contains('shared-3d-ready')) {
+          sharedStage.celebrate();
+        }
+      });
     });
-  });
+  }
   const sheet = node('section', 'reader-sheet');
   if (current.ending) sheet.append(node('p', 'ending', ui['player.ending']));
-  let paragraphCooldown = false;
-  const situation = button(current.situation, async () => {
-    if (paragraphCooldown || narrator.isPlaying()) return;
-    paragraphCooldown = true;
-    situation.disabled = true;
-    try { await narrator.play([lines[0]]); }
-    finally {
-      window.setTimeout(() => { paragraphCooldown = false; situation.disabled = false; }, 1500);
-    }
-  }, 'situation tap-to-hear');
-  situation.dataset.lineIndex = '0';
-  situation.dataset.lineId = lines[0].id;
-  situation.setAttribute('aria-label', `${extraUi[state.language].repeatSituation}: ${current.situation}`);
-  if (timedWordsFor(lines[0], wordTimings[state.language]?.[lines[0].id])) {
-    situation.dataset.wordTimingId = lines[0].id;
-    let wordIndex = 0;
-    situation.replaceChildren(...wordParts(current.situation).map(part => {
-      if (/^\s+$/u.test(part)) return document.createTextNode(part);
-      const span = node('span', 'spoken-word', part);
-      span.dataset.wordIndex = String(wordIndex++);
-      return span;
-    }));
-  }
+  const situation = createSituationButton(current.situation, lines[0]);
   sheet.append(situation);
-  const actions = node('div', 'reader-actions');
-  const replay = button('🔊  ' + ui['player.replayShort'], speechCooldown(async () => {
-    situation.hidden = false;
-    situation.scrollTop = 0;
-    const played = await narrator.play(lines);
-    if (!played && situation.isConnected) situation.hidden = false;
-  }), 'secondary');
-  replay.setAttribute('aria-label', ui['player.replay']);
-  actions.append(replay);
-  const helpButton = button('💡  ' + ui['player.helpShort'], speechCooldown(() => {
-    narrator.stop(); help.hidden = !help.hidden;
-    if (!help.hidden) narrator.play([{ id: `${id}.hint`, text: current.hint }]);
-  }), 'secondary');
-  helpButton.setAttribute('aria-label', ui['player.help']);
-  actions.append(helpButton);
-  sheet.append(actions);
-  const help = node('p', 'hint', current.hint); help.hidden = true; sheet.append(help);
-  const choices = node('div', 'choices');
-  current.choices.forEach((choice, index) => {
-    const row = node('div', 'choice-row');
-    const chooseButton = button(choice.text, () => {}, 'choice-select');
-    chooseButton.dataset.lineIndex = String(index + 1);
-    chooseButton.dataset.lineId = lines[index + 1].id;
-    chooseButton.setAttribute('aria-label', choice.text);
-    attachHold(chooseButton, speechCooldown(() => narrator.play([lines[index + 1]])), () => choose(index));
-    const speaker = button('🔊', speechCooldown(() => narrator.play([lines[index + 1]])), 'choice-speaker');
-    speaker.setAttribute('aria-label', `${ui['player.choiceSpeaker']}: ${choice.text}`);
-    row.append(chooseButton, speaker); choices.append(row);
-  });
-  sheet.append(choices); root.append(sheet);
+  const { actions, help } = createReaderControls(situation, lines, id, current);
+  sheet.append(actions, help, createChoices(current, lines));
+  root.append(sheet);
   const curtain = node('div', 'story-preparing', princessLoadText[state.language].loading);
   curtain.setAttribute('role', 'status');
   root.append(curtain);
@@ -409,86 +557,118 @@ function openGate() {
   const first = 12 + Math.floor(Math.random() * 8);
   const second = 12 + Math.floor(Math.random() * 8);
   gateAnswer = first + second;
-  const panel = node('div', 'modal-panel'); panel.append(node('h2', '', 'Parents'), node('p', '', `Grown-up check: What is ${first} + ${second}?`));
-  const field = node('input'); field.type = 'number'; field.inputMode = 'numeric'; field.setAttribute('aria-label', 'Answer to grown-up check');
-  const error = node('p', 'gate-error'); error.setAttribute('role', 'alert');
-  panel.append(field, error, button('Continue', () => {
-    if (Number(field.value) !== gateAnswer || !field.value.trim()) { error.textContent = 'Please try again.'; return; }
+  const panel = node('div', 'modal-panel');
+  panel.append(node('h2', '', 'Parents'), node('p', '', `Grown-up check: What is ${first} + ${second}?`));
+  const field = node('input');
+  field.type = 'number';
+  field.inputMode = 'numeric';
+  field.setAttribute('aria-label', 'Answer to grown-up check');
+  const error = node('p', 'gate-error');
+  error.setAttribute('role', 'alert');
+
+  const continueButton = button('Continue', () => {
+    if (Number(field.value) !== gateAnswer || !field.value.trim()) {
+      error.textContent = 'Please try again.';
+      return;
+    }
     renderSettings();
-  }, 'primary'), button('Cancel', () => overlay.replaceChildren(), 'quiet'));
-  const backdrop = node('div', 'backdrop'); backdrop.append(panel); overlay.replaceChildren(backdrop); field.focus();
+  }, 'primary');
+  panel.append(field, error, continueButton, button('Cancel', () => overlay.replaceChildren(), 'quiet'));
+  const backdrop = node('div', 'backdrop');
+  backdrop.append(panel);
+  overlay.replaceChildren(backdrop);
+  field.focus();
 }
 function renderSettings() {
   const panel = node('div', 'modal-panel settings');
   panel.append(node('h2', '', 'Parent settings'), node('p', '', 'Changes are saved on this device.'));
   const langLabel = node('label', 'setting-label', 'Story language');
   const select = node('select');
-  for (const [code, name] of [['en','English'],['es','Español'],['gu','ગુજરાતી']]) {
-    const option = node('option', '', name); option.value = code; select.append(option);
+  for (const [code, name] of [['en', 'English'], ['es', 'Español'], ['gu', 'ગુજરાતી']]) {
+    const option = node('option', '', name);
+    option.value = code;
+    select.append(option);
   }
   select.value = state.language;
-  select.addEventListener('change', () => { state.language = select.value; save(); setNarrator(); if (screen === 'reader') { story = localizeStory(baseStories.find(item => item.id === story.id), localeContent[state.language]); session = startOrResume(story, state.progress); } render(false); renderSettings(); });
+  select.addEventListener('change', () => {
+    state.language = select.value;
+    save();
+    setNarrator();
+    if (screen === 'reader') {
+      const base = baseStories.find(item => item.id === story.id);
+      story = localizeStory(base, localeContent[state.language]);
+      session = startOrResume(story, state.progress);
+    }
+    render(false);
+    renderSettings();
+  });
   langLabel.append(select); panel.append(langLabel, node('h3', '', 'Choose Princess Alisha'));
   const picker = node('div', 'princess-picker');
-  for (const key of ['adventure','star']) {
-    const item = button(portrait[key].name + (state.princess === key ? ' ✓' : ''), () => { state.princess = key; save(); render(false); renderSettings(); }, 'princess-option');
-    item.prepend(image(key)); picker.append(item);
+  for (const key of ['adventure', 'star']) {
+    const item = button(portrait[key].name + (state.princess === key ? ' ✓' : ''), () => {
+      state.princess = key;
+      save();
+      render(false);
+      renderSettings();
+    }, 'princess-option');
+    item.prepend(image(key));
+    picker.append(item);
   }
   panel.append(picker);
   if (window.AndroidGameLock) {
     const pin = button('', () => window.AndroidGameLock.toggle(), 'secondary');
     pin.dataset.pinControl = 'true';
-    const refreshPin = () => { const pinned = window.AndroidGameLock.isPinned(); pin.textContent = `Keep game open: ${pinned ? 'On — turn off' : 'Off — turn on'}`; pin.setAttribute('aria-pressed', String(pinned)); };
+    const refreshPin = () => {
+      const pinned = window.AndroidGameLock.isPinned();
+      pin.textContent = `Keep game open: ${pinned ? 'On — turn off' : 'Off — turn on'}`;
+      pin.setAttribute('aria-pressed', String(pinned));
+    };
     refreshPin();
     const pinPoll = window.setInterval(() => {
-      if (!panel.isConnected) { window.clearInterval(pinPoll); return; }
+      if (!panel.isConnected) {
+        window.clearInterval(pinPoll);
+        return;
+      }
       refreshPin();
     }, 1000);
-    panel.append(node('h3', '', 'Screen pinning'), pin, node('p', 'pinning-note', 'Android will ask you to confirm pinning. Enable Require PIN to unpin in phone settings for stronger protection.'));
+    panel.append(
+      node('h3', '', 'Screen pinning'),
+      pin,
+      node('p', 'pinning-note', 'Android will ask you to confirm pinning. Enable Require PIN to unpin in phone settings for stronger protection.')
+    );
   }
   panel.append(button('Close', () => overlay.replaceChildren(), 'primary'));
-  const backdrop = node('div', 'backdrop'); backdrop.append(panel); overlay.replaceChildren(backdrop);
+  const backdrop = node('div', 'backdrop');
+  backdrop.append(panel);
+  overlay.replaceChildren(backdrop);
 }
-function render(announce = true) { ui = uiContent[state.language]; document.documentElement.lang = state.language; narrator?.stop(); sharedStage.setTalking(false); sharedStage.unmount(); document.body.classList.toggle('library-page', screen === 'library'); document.body.classList.toggle('reader-page', screen === 'reader'); if (screen === 'reader') renderReader(announce); else renderLibrary(announce); }
-window.addEventListener('android-game-lock', () => { if (overlay.querySelector('[data-pin-control]')) renderSettings(); });
 
-let localeContent = {}, uiContent = {};
-async function loadJson(url) {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`Could not load ${url}: ${response.status}`);
-  return response.json();
+function render(announce = true) {
+  ui = uiContent[state.language];
+  document.documentElement.lang = state.language;
+  narrator?.stop();
+  sharedStage.setTalking(false);
+  sharedStage.unmount();
+  document.body.classList.toggle('library-page', screen === 'library');
+  document.body.classList.toggle('reader-page', screen === 'reader');
+  if (screen === 'reader') renderReader(announce);
+  else renderLibrary(announce);
 }
+
+window.addEventListener('android-game-lock', () => {
+  if (overlay.querySelector('[data-pin-control]')) renderSettings();
+});
+
 async function init() {
   try {
-    const [base, sleepy, cloud, en, es, gu, sleepyEn, sleepyEs, sleepyGu, cloudEn, cloudEs, cloudGu, uiEn, uiEs, uiGu, audio, sleepyAudio, cloudAudio, timings, sleepyTimings, cloudTimings, art, sleepyArt, cloudArt, covers, sleepyCovers, cloudCovers, motions, sleepyMotions, cloudMotions] = await Promise.all([
-      loadJson('../story/alisha-lost-star.json'),
-      loadJson('../story/alisha-sleepy-castle.json'),
-      loadJson('../story/alisha-cloud-wouldnt-rain.json'),
-      loadJson('../story/locales/en.draft.json'), loadJson('../story/locales/es.draft.json'), loadJson('../story/locales/gu.draft.json'),
-      loadJson('../story/locales/sleepy.en.json'), loadJson('../story/locales/sleepy.es.json'), loadJson('../story/locales/sleepy.gu.json'),
-      loadJson('../story/locales/cloud.en.json'), loadJson('../story/locales/cloud.es.json'), loadJson('../story/locales/cloud.gu.json'),
-      loadJson('../story/locales/ui.en.draft.json'), loadJson('../story/locales/ui.es.draft.json'), loadJson('../story/locales/ui.gu.draft.json'),
-      loadJson('../audio/manifest.json'), loadJson('../audio/sleepy-manifest.json'), loadJson('../audio/cloud-manifest.json'),
-      loadJson('../audio/word-timings.draft.json'), loadJson('../audio/sleepy-word-timings.json'), loadJson('../audio/cloud-word-timings.json'),
-      loadJson('../story/scene-art.draft.json'), loadJson('../story/sleepy-scene-art.json'), loadJson('../story/cloud-scene-art.json'),
-      loadJson('../story/library-covers.draft.json'), loadJson('../story/sleepy-library-covers.json'), loadJson('../story/cloud-library-covers.json'),
-      loadJson('../story/body-motion.draft.json'), loadJson('../story/sleepy-body-motion.json'), loadJson('../story/cloud-body-motion.json')
-    ]);
-    baseStories = [base, sleepy, cloud];
-    localeContent = {
-      en: { language: 'en', lines: { ...en.lines, ...sleepyEn.lines, ...cloudEn.lines } },
-      es: { language: 'es', lines: { ...es.lines, ...sleepyEs.lines, ...cloudEs.lines } },
-      gu: { language: 'gu', lines: { ...gu.lines, ...sleepyGu.lines, ...cloudGu.lines } }
-    };
-    uiContent = { en: uiEn.lines, es: uiEs.lines, gu: uiGu.lines };
-    audioManifest = Object.fromEntries(['en', 'es', 'gu'].map(language => [language, { ...audio.recordings[language], ...sleepyAudio.recordings[language], ...cloudAudio.recordings[language] }]));
-    wordTimings = Object.fromEntries(['en', 'es', 'gu'].map(language => [language, { ...timings.timings[language], ...sleepyTimings.timings[language], ...cloudTimings.timings[language] }]));
-    sceneArt = { ...art.scenes, ...sleepyArt.scenes, ...cloudArt.scenes };
-    libraryCovers = { ...covers.stories, ...sleepyCovers.stories, ...cloudCovers.stories };
-    bodyMotion = { ...motions, scenes: { ...motions.scenes, ...sleepyMotions.scenes, ...cloudMotions.scenes } };
+    ({ baseStories, localeContent, uiContent, audioManifest, wordTimings, sceneArt, libraryCovers, bodyMotion } = await loadContent());
     state = normalizeState(readSavedState(browserStorage(window)), baseStories);
-    ui = uiContent[state.language]; setNarrator(); render();
-  } catch (error) { root.replaceChildren(node('p', 'load-error', `Alisha’s Adventures could not load: ${error.message}.`)); }
+    ui = uiContent[state.language];
+    setNarrator();
+    render();
+  } catch (error) {
+    root.replaceChildren(node('p', 'load-error', `Alisha’s Adventures could not load: ${error.message}.`));
+  }
 }
 init();
 
