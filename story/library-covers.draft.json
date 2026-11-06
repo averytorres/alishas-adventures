@@ -1,0 +1,9 @@
+{
+  "status": "DRAFT_TEMPORARY",
+  "stories": {
+    "alisha-lost-star": {
+      "adventure": "../assets/covers/lost-star-adventurer-TEMP.png",
+      "star": "../assets/covers/lost-star-princess-green-dragon-TEMP.png"
+    }
+  }
+}

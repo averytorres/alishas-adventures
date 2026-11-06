@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 2,
+  "selectionRule": "Exactly one approved woman narrator per language; no in-app voice selection.",
+  "pronunciation": {
+    "name": "Alisha",
+    "guide": "ah-LEE-sha",
+    "source": "user-confirmed",
+    "appliesTo": [
+      "en",
+      "es",
+      "gu"
+    ]
+  },
+  "voices": {
+    "en": {
+      "language": "English",
+      "voiceId": "2OEeJcYw2f3bWMzzjVMU",
+      "modelId": "eleven_multilingual_v2",
+      "status": "USER_SELECTED_SAMPLE_APPROVED",
+      "name": "Clara"
+    },
+    "es": {
+      "language": "Spanish",
+      "voiceId": "tTdCI0IDTgFa2iLQiWu4",
+      "modelId": "eleven_multilingual_v2",
+      "status": "USER_SELECTED_SAMPLE_APPROVED",
+      "name": "Daniela"
+    },
+    "gu": {
+      "language": "Gujarati",
+      "voiceId": "dCfjdikb3Vzuo3qxhmwc",
+      "modelId": "eleven_v3",
+      "status": "USER_SELECTED_SAMPLE_APPROVED",
+      "name": "Mitali Ben"
+    }
+  },
+  "rejectedFirstSamples": {
+    "en": "Rachel",
+    "es": "Luisa",
+    "gu": "Hiral Ben"
+  },
+  "warmCandidates": {
+    "en": [
+      {
+        "name": "Anna",
+        "voiceId": "Cx2PEJFdr8frSuUVB6yZ",
+        "modelId": "eleven_multilingual_v2",
+        "file": "production/audio-samples/en-anna-warm-TEMP.mp3",
+        "status": "NOT_SELECTED"
+      },
+      {
+        "name": "Clara",
+        "voiceId": "2OEeJcYw2f3bWMzzjVMU",
+        "modelId": "eleven_multilingual_v2",
+        "file": "production/audio-samples/en-clara-warm-TEMP.mp3",
+        "status": "USER_SELECTED_SAMPLE_APPROVED"
+      }
+    ],
+    "es": [
+      {
+        "name": "Gaby",
+        "voiceId": "yqTu7PvIL2rV3ubtjNlx",
+        "modelId": "eleven_multilingual_v2",
+        "file": "production/audio-samples/es-gaby-warm-TEMP.mp3",
+        "status": "NOT_SELECTED"
+      },
+      {
+        "name": "Daniela",
+        "voiceId": "tTdCI0IDTgFa2iLQiWu4",
+        "modelId": "eleven_multilingual_v2",
+        "file": "production/audio-samples/es-daniela-warm-TEMP.mp3",
+        "status": "USER_SELECTED_SAMPLE_APPROVED"
+      }
+    ],
+    "gu": [
+      {
+        "name": "Mahi",
+        "voiceId": "aVwNS3gNch2GhQaTeQ54",
+        "modelId": "eleven_v3",
+        "file": "production/audio-samples/gu-mahi-warm-TEMP.mp3",
+        "status": "NOT_SELECTED"
+      },
+      {
+        "name": "Mitali Ben",
+        "voiceId": "dCfjdikb3Vzuo3qxhmwc",
+        "modelId": "eleven_v3",
+        "file": "production/audio-samples/gu-mitali-warm-TEMP.mp3",
+        "status": "USER_SELECTED_SAMPLE_APPROVED"
+      }
+    ]
+  }
+}

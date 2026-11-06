@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Review one woman narrator per language before full generation",
+  "pronunciation": {
+    "Alisha": "ah-LEE-sha"
+  },
+  "samples": [
+    {
+      "language": "en",
+      "lineId": "alisha-lost-star.description",
+      "text": "A little dragon has lost the star that lights the way home. Explore moonlit places with Princess Alisha, follow gentle clues, and discover different ways to help.",
+      "textSha256": "95e332f5e9b92a3226995884c1d1cba809e0dbd199d226c3fb552b2ea64f0ae4",
+      "characters": 162,
+      "voiceId": "21m00Tcm4TlvDq8ikWAM",
+      "modelId": "eleven_multilingual_v2",
+      "status": "REJECTED_BY_USER",
+      "file": "production/audio-samples/en-description-Rachel-TEMP.mp3"
+    },
+    {
+      "language": "en",
+      "lineId": "castle_gate.situation",
+      "text": "Princess Alisha stepped outside just as the sky turned purple. A little dragon sat beside the castle gate. His wings drooped. 'My guiding star fell from the sky,' he said. 'Without it, I cannot find my way home.' Alisha looked up. One small space in the sky was dark. A silver sparkle floated past the gate, then vanished around the bend. The dragon gave Alisha a hopeful smile. 'Will you look with me?' The path divided ahead. One way crossed a wooden bridge. The other led into the moon garden. Both looked full of surprises.",
+      "textSha256": "9d492cc8770076284dc93ac00c1558bb3dd80a5cf4c34f90b985457795f6e879",
+      "characters": 527,
+      "voiceId": null,
+      "modelId": null,
+      "status": "NOT_GENERATED"
+    },
+    {
+      "language": "en",
+      "lineId": "castle_gate.choice.0",
+      "text": "Cross the wooden bridge.",
+      "textSha256": "97863f88eba8f1d95d8b0a318dbcb1762a39ef37b747cf765557f5a222105f2d",
+      "characters": 24,
+      "voiceId": null,
+      "modelId": null,
+      "status": "NOT_GENERATED"
+    },
+    {
+      "language": "es",
+      "lineId": "alisha-lost-star.description",
+      "text": "Un pequeño dragón perdió la estrella que le muestra el camino a casa. Acompaña a la princesa Alisha por lugares iluminados por la luna, sigue las pistas y descubre distintas maneras de ayudar.",
+      "textSha256": "cafcf274e65ca10cad042d2a35bb8f72a752881e26988af4c910598517030bb6",
+      "characters": 192,
+      "voiceId": "ByzPpv6d6pT90CCpgb7k",
+      "modelId": "eleven_multilingual_v2",
+      "status": "REJECTED_BY_USER",
+      "file": "production/audio-samples/es-description-Luisa-TEMP.mp3"
+    },
+    {
+      "language": "es",
+      "lineId": "castle_gate.situation",
+      "text": "La princesa Alisha salió del castillo cuando el cielo se puso violeta. Junto a la puerta estaba sentado un pequeño dragón. Tenía las alas caídas. «Mi estrella guía se cayó del cielo», dijo. «Sin ella, no sé volver a casa». Alisha miró hacia arriba. Había un huequito oscuro en el cielo. Una luz plateada pasó flotando junto a la puerta y desapareció al doblar el camino. El dragón le sonrió con esperanza. «¿Me ayudas a buscarla?». El camino se dividía en dos. Un lado cruzaba un puente de madera. El otro entraba en el jardín de la luna. ¡Los dos parecían llenos de sorpresas!",
+      "textSha256": "fcc4cf9c0e38ec67fd52b2ec7d6719249aecddbcf0c550569069a2139f59b1f5",
+      "characters": 577,
+      "voiceId": null,
+      "modelId": null,
+      "status": "NOT_GENERATED"
+    },
+    {
+      "language": "es",
+      "lineId": "castle_gate.choice.0",
+      "text": "Cruzar el puente de madera.",
+      "textSha256": "e3f38be036a42100b1d094480ecc60aff03150afe24c9e093cb634eda44d38bb",
+      "characters": 27,
+      "voiceId": null,
+      "modelId": null,
+      "status": "NOT_GENERATED"
+    },
+    {
+      "language": "gu",
+      "lineId": "alisha-lost-star.description",
+      "text": "નાનકડા ડ્રેગનનો ઘરનો રસ્તો બતાવતો તારો ખોવાઈ ગયો છે. રાજકુમારી આલીશા સાથે ચાંદનીમાં ફરવા નીકળો, નાની કડીઓ શોધો અને તેને મદદ કરવાની જુદી જુદી રીતો જાણો.",
+      "textSha256": "37b43e8c937a687086d862f6d58b06a1b6a161a89316e81bd15f3ab91e2ca43d",
+      "characters": 151,
+      "voiceId": "OIIrFPBzLAigdcttMGWZ",
+      "modelId": "eleven_v3",
+      "status": "REJECTED_BY_USER",
+      "file": "production/audio-samples/gu-description-Hiral-Ben-TEMP.mp3"
+    },
+    {
+      "language": "gu",
+      "lineId": "castle_gate.situation",
+      "text": "આકાશ જાંબલી થયું ત્યારે રાજકુમારી આલીશા બહાર આવી. કિલ્લાના દરવાજા પાસે એક નાનો ડ્રેગન બેઠો હતો. તેની પાંખો ઢીલી પડી હતી. તેણે કહ્યું, ‘મારો રસ્તો બતાવતો તારો આકાશમાંથી પડી ગયો. તેના વગર મને ઘરનો રસ્તો મળતો નથી.’ આલીશાએ ઉપર જોયું. આકાશમાં એક નાની જગ્યા અંધારી હતી. દરવાજા પાસેથી ચાંદી જેવો ઝબકારો પસાર થયો અને વળાંક પાછળ ગાયબ થઈ ગયો. ડ્રેગન આશાભરી મુસ્કાન સાથે બોલ્યો, ‘તું મારી સાથે શોધીશ?’ આગળ બે રસ્તા હતા. એક લાકડાના પુલ પરથી જતો હતો, બીજો ચાંદની બગીચામાં. બંનેમાં કંઈક નવું જોવા મળવાનું હતું.",
+      "textSha256": "bb7a09cba37be73d9716410f5cd98c2facda74cd822a6e346770624b71aea518",
+      "characters": 496,
+      "voiceId": null,
+      "modelId": null,
+      "status": "NOT_GENERATED"
+    },
+    {
+      "language": "gu",
+      "lineId": "castle_gate.choice.0",
+      "text": "લાકડાનો પુલ પાર કરવો.",
+      "textSha256": "bed0407af4dac05f5d6dc646fbb3a781a9fe7ad95cfa17261f104e9684c98701",
+      "characters": 21,
+      "voiceId": null,
+      "modelId": null,
+      "status": "NOT_GENERATED"
+    }
+  ]
+}

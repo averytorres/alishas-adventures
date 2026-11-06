@@ -1,0 +1,17 @@
+{
+  "language": "gu", "status": "DRAFT_NEEDS_NATIVE_REVIEW",
+  "lines": {
+    "library.instruction": "એક વાર્તા પસંદ કરો. તે શેના વિશે છે તે સાંભળવા તેનું ચિત્ર દબાવી રાખો અથવા સ્પીકરનું બટન દબાવો.",
+    "library.storySpeaker": "આ વાર્તા વિશે સાંભળો",
+    "library.start": "વાર્તા શરૂ કરો",
+    "library.resume": "વાર્તા આગળ ચાલુ રાખો",
+    "library.restart": "શરૂઆતથી વાર્તા શરૂ કરો",
+    "player.replay": "આ ભાગ અને પસંદગીઓ ફરી સાંભળો",
+    "player.replayShort": "ફરી સાંભળો",
+    "player.help": "પસંદ કરવામાં મદદ કરો",
+    "player.helpShort": "મદદ કરો",
+    "player.choiceSpeaker": "આ પસંદગી ફરી સાંભળો",
+    "player.home": "વાર્તાઓ પર પાછા જાઓ",
+    "player.ending": "સમાપ્ત"
+  }
+}

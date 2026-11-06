@@ -1,0 +1,725 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "narration.word-timings.cloud-guide",
+      "kind": "audio timing",
+      "whereUsed": "spoken word highlighting in all 46 story situations in three languages",
+      "file": "audio/word-timings.draft.json",
+      "status": "TEMPORARY",
+      "reason": "All situations aligned; English, Spanish, and especially Gujarati still need listening and phone visual review",
+      "replacementSpec": "Reviewed timing cues for every situation paragraph",
+      "dueMilestone": "complete adventure"
+    },
+    {
+      "id": "cover.lost-star.adventurer",
+      "kind": "art",
+      "whereUsed": "story library when Adventurer Alisha is selected",
+      "file": "assets/covers/lost-star-adventurer-TEMP.png",
+      "status": "TEMPORARY",
+      "reason": "Generated story cover candidate; character and story details still need approval",
+      "replacementSpec": "Reviewed cover matching the approved story and princess design",
+      "dueMilestone": "final-quality candidate"
+    },
+    {
+      "id": "cover.lost-star.star",
+      "kind": "art",
+      "whereUsed": "story library when Star Princess Alisha is selected",
+      "file": "assets/covers/lost-star-princess-green-dragon-TEMP.png",
+      "status": "TEMPORARY",
+      "reason": "Generated story cover candidate; character and story details still need approval",
+      "replacementSpec": "Reviewed cover matching the approved story and princess design",
+      "dueMilestone": "final-quality candidate"
+    },
+    {
+      "id": "scene.moon-bridge",
+      "kind": "art",
+      "whereUsed": "bridge_song only",
+      "file": "assets/scenes/moon-bridge-WIDE-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Wide scene illustration with foreground ground; final art and phone review pending",
+      "replacementSpec": "Reviewed scene art with consistent details and character placement",
+      "dueMilestone": "final-quality candidate"
+    },
+    {
+      "id": "scene.windmill-hill",
+      "kind": "art",
+      "whereUsed": "hill_path only",
+      "file": "assets/scenes/windmill-hill-WIDE-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Wide scene illustration with foreground ground; final art and phone review pending",
+      "replacementSpec": "Reviewed scene art with consistent details and character placement",
+      "dueMilestone": "final-quality candidate"
+    },
+    {
+      "id": "scene.cloud-overlook",
+      "kind": "art",
+      "whereUsed": "cloud_edge only",
+      "file": "assets/scenes/cloud-overlook-WIDE-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Wide scene illustration with foreground ground; final art and phone review pending",
+      "replacementSpec": "Reviewed scene art with consistent details and character placement",
+      "dueMilestone": "final-quality candidate"
+    },
+    {
+      "id": "dragon.happy",
+      "kind": "art",
+      "whereUsed": "illustrated route scenes after the opening",
+      "file": "assets/candidates/dragon-happy-TEMP.png",
+      "status": "TEMPORARY",
+      "reason": "Flattened expression edit; no rig or approval yet",
+      "replacementSpec": "Approved layered dragon with consistent expressions and gestures",
+      "dueMilestone": "final-quality candidate"
+    },
+    {
+      "id": "app.launcher.icon",
+      "kind": "art",
+      "whereUsed": "Android launcher",
+      "file": "android/res/drawable-nodpi/app_icon.png",
+      "status": "TEMPORARY",
+      "reason": "First storybook icon candidate; awaiting parent approval at launcher size",
+      "replacementSpec": "Approved, size-tested launcher icon and editable master",
+      "dueMilestone": "final-quality candidate"
+    },
+    {
+      "id": "princess.adventurer.portrait",
+      "kind": "art",
+      "whereUsed": "prototype scene and parent picker",
+      "file": "assets/princess-adventure.png",
+      "status": "TEMPORARY",
+      "reason": "Flattened portrait; no separate face or arm parts",
+      "replacementSpec": "Approved layered Adventurer rig with blink, speech mouth shapes, gestures, and editable master",
+      "dueMilestone": "final-quality candidate"
+    },
+    {
+      "id": "princess.star.portrait",
+      "kind": "art",
+      "whereUsed": "prototype scene and parent picker",
+      "file": "assets/princess-star.png",
+      "status": "TEMPORARY",
+      "reason": "Flattened portrait; no separate face or arm parts",
+      "replacementSpec": "Approved layered Star rig with blink, speech mouth shapes, gestures, and editable master",
+      "dueMilestone": "final-quality candidate"
+    },
+    {
+      "id": "story.prototype",
+      "kind": "content",
+      "whereUsed": "prototype story screens",
+      "file": "app.js",
+      "status": "TEMPORARY",
+      "reason": "Short test story rather than approved full adventure; French remains in prototype",
+      "replacementSpec": "Reviewed Lost Star graph and approved English, Spanish, Gujarati scripts",
+      "dueMilestone": "complete adventure"
+    },
+    {
+      "id": "audio.prototype.music",
+      "kind": "audio",
+      "whereUsed": "prototype music and effects",
+      "file": "app.js",
+      "status": "TEMPORARY",
+      "reason": "Generated tones rather than approved music and effects mix",
+      "replacementSpec": "Approved offline music and effects assets at child-safe levels",
+      "dueMilestone": "final-quality candidate"
+    },
+    {
+      "id": "story.lost-star.draft",
+      "kind": "content",
+      "whereUsed": "development story player",
+      "file": "story/alisha-lost-star.json",
+      "status": "TEMPORARY",
+      "reason": "English story has not passed final script and timed-read review",
+      "replacementSpec": "Approved final story graph and line inventory",
+      "dueMilestone": "complete adventure"
+    },
+    {
+      "id": "locale.es.draft",
+      "kind": "translation",
+      "whereUsed": "development story player",
+      "file": "story/locales/es.draft.json",
+      "status": "TEMPORARY",
+      "reason": "Complete best-effort Spanish draft with recorded narration; no fluent human text or listening approval",
+      "replacementSpec": "Spanish script approved after voice-sample QC and any later language corrections",
+      "dueMilestone": "complete adventure"
+    },
+    {
+      "id": "locale.gu.draft",
+      "kind": "translation",
+      "whereUsed": "development story player",
+      "file": "story/locales/gu.draft.json",
+      "status": "TEMPORARY",
+      "reason": "Complete best-effort Gujarati draft with recorded narration; no fluent human text or listening approval",
+      "replacementSpec": "Gujarati script approved after voice-sample QC and any later language corrections",
+      "dueMilestone": "complete adventure"
+    },
+    {
+      "id": "narration.pending",
+      "kind": "audio",
+      "whereUsed": "all story branches and child-facing spoken controls",
+      "file": "audio/manifest.json",
+      "status": "FINAL_CANDIDATE",
+      "reason": "All 600 required lines are recorded with text hashes; listening and phone playback review remain",
+      "replacementSpec": "Human-reviewed offline narration in all three languages",
+      "dueMilestone": "complete adventure"
+    },
+    {
+      "id": "narration.sample.en",
+      "kind": "audio",
+      "whereUsed": "voice review only",
+      "file": "production/audio-samples/en-description-Rachel-TEMP.mp3",
+      "status": "TEMPORARY",
+      "reason": "First narrator sample rejected by user for tone",
+      "replacementSpec": "Approved narrator and final recorded lines",
+      "dueMilestone": "voice selection"
+    },
+    {
+      "id": "narration.sample.es",
+      "kind": "audio",
+      "whereUsed": "voice review only",
+      "file": "production/audio-samples/es-description-Luisa-TEMP.mp3",
+      "status": "TEMPORARY",
+      "reason": "First narrator sample rejected by user for tone",
+      "replacementSpec": "Approved narrator and final recorded lines",
+      "dueMilestone": "voice selection"
+    },
+    {
+      "id": "narration.sample.gu",
+      "kind": "audio",
+      "whereUsed": "voice review only",
+      "file": "production/audio-samples/gu-description-Hiral-Ben-TEMP.mp3",
+      "status": "TEMPORARY",
+      "reason": "First narrator sample rejected by user for tone",
+      "replacementSpec": "Approved narrator and final recorded lines",
+      "dueMilestone": "voice selection"
+    },
+    {
+      "id": "animation.adventurer.study",
+      "kind": "animation",
+      "whereUsed": "story player and animation preview",
+      "file": "assets/candidates/adventurer-4poses-TEMP.png",
+      "status": "TEMPORARY",
+      "reason": "Four-frame concept sheet, not a layered rig; idle blink swap flickered and face-only blink/mouth patches distorted or misaligned the face, so both were removed",
+      "replacementSpec": "Approved editable layered rig with separately drawn, aligned eyes and at least five distinct mouth poses, plus natural body motion",
+      "dueMilestone": "vertical slice"
+    },
+    {
+      "id": "animation.star.study",
+      "kind": "animation",
+      "whereUsed": "story player and animation preview",
+      "file": "assets/candidates/star-4poses-TEMP.png",
+      "status": "TEMPORARY",
+      "reason": "Four-frame concept sheet with edge artifacts, not a layered rig; idle blink swap flickered and face-only blink/mouth patches distorted or misaligned the face, so both were removed",
+      "replacementSpec": "Clean approved editable layered rig with separately drawn, aligned eyes and at least five distinct mouth poses, plus natural body motion",
+      "dueMilestone": "vertical slice"
+    },
+    {
+      "id": "scene.castle-gate.study",
+      "kind": "background",
+      "whereUsed": "castle gate development scene",
+      "file": "assets/candidates/castle-gate-TEMP.png",
+      "status": "TEMPORARY",
+      "reason": "Generated scene concept pending composition and phone review",
+      "replacementSpec": "Approved portrait scene art",
+      "dueMilestone": "vertical slice"
+    },
+    {
+      "id": "dragon.sad.study",
+      "kind": "character",
+      "whereUsed": "castle gate development scene",
+      "file": "assets/candidates/dragon-sad-TEMP.png",
+      "status": "TEMPORARY",
+      "reason": "Flattened dragon concept with edge artifacts",
+      "replacementSpec": "Approved clean dragon character art with expression and motion parts",
+      "dueMilestone": "vertical slice"
+    },
+    {
+      "id": "narration.candidate.en-anna",
+      "kind": "audio",
+      "whereUsed": "voice review only",
+      "file": "production/audio-samples/en-anna-warm-TEMP.mp3",
+      "status": "TEMPORARY",
+      "reason": "Alternative narrator sample not selected",
+      "replacementSpec": "Approved narrator and final recorded lines",
+      "dueMilestone": "voice selection"
+    },
+    {
+      "id": "narration.candidate.en-clara",
+      "kind": "audio",
+      "whereUsed": "voice review only",
+      "file": "production/audio-samples/en-clara-warm-TEMP.mp3",
+      "status": "FINAL_CANDIDATE",
+      "reason": "User-selected narrator used for complete story recordings; new lines still need listening review",
+      "replacementSpec": "Approved narrator and final recorded lines",
+      "dueMilestone": "voice selection"
+    },
+    {
+      "id": "narration.candidate.es-gaby",
+      "kind": "audio",
+      "whereUsed": "voice review only",
+      "file": "production/audio-samples/es-gaby-warm-TEMP.mp3",
+      "status": "TEMPORARY",
+      "reason": "Alternative narrator sample not selected",
+      "replacementSpec": "Approved narrator and final recorded lines",
+      "dueMilestone": "voice selection"
+    },
+    {
+      "id": "narration.candidate.es-daniela",
+      "kind": "audio",
+      "whereUsed": "voice review only",
+      "file": "production/audio-samples/es-daniela-warm-TEMP.mp3",
+      "status": "FINAL_CANDIDATE",
+      "reason": "User-selected narrator used for complete story recordings; new lines still need listening review",
+      "replacementSpec": "Approved narrator and final recorded lines",
+      "dueMilestone": "voice selection"
+    },
+    {
+      "id": "narration.candidate.gu-mahi",
+      "kind": "audio",
+      "whereUsed": "voice review only",
+      "file": "production/audio-samples/gu-mahi-warm-TEMP.mp3",
+      "status": "TEMPORARY",
+      "reason": "Alternative narrator sample not selected",
+      "replacementSpec": "Approved narrator and final recorded lines",
+      "dueMilestone": "voice selection"
+    },
+    {
+      "id": "narration.candidate.gu-mitali",
+      "kind": "audio",
+      "whereUsed": "voice review only",
+      "file": "production/audio-samples/gu-mitali-warm-TEMP.mp3",
+      "status": "FINAL_CANDIDATE",
+      "reason": "User-selected narrator used for complete story recordings; new lines still need listening review",
+      "replacementSpec": "Approved narrator and final recorded lines",
+      "dueMilestone": "voice selection"
+    },
+    {
+      "id": "narration.opening.draft",
+      "kind": "audio",
+      "whereUsed": "library teaser and castle gate opening screen",
+      "file": "audio/manifest.json",
+      "status": "FINAL_CANDIDATE",
+      "reason": "Opening recordings pass the strict file and text audit; listening review remains",
+      "replacementSpec": "Complete reviewed recordings and timed cues for all child-facing lines",
+      "dueMilestone": "complete adventure"
+    },
+    {
+      "id": "narration.route.cloud-guide.draft",
+      "kind": "audio",
+      "whereUsed": "all 46 story situations, choices, hints, and child-facing UI in three languages",
+      "file": "audio/manifest.json",
+      "status": "FINAL_CANDIDATE",
+      "reason": "All 600 required lines are recorded; the strict audit passes; listening and phone playback review remain",
+      "replacementSpec": "Reviewed narration and timing for all story branches and child-facing lines",
+      "dueMilestone": "complete adventure"
+    },
+    {
+      "id": "scene.frog_clue",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in frog_clue",
+      "file": "assets/scenes/frog_clue-REVISED-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Placement revised after phone and contact-sheet review; final art and phone review pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.muddy_tracks",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in muddy_tracks",
+      "file": "assets/scenes/muddy_tracks-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.moth_clue",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in moth_clue",
+      "file": "assets/scenes/moth_clue-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.snail_clue",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in snail_clue",
+      "file": "assets/scenes/snail_clue-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.windmill_keeper",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in windmill_keeper",
+      "file": "assets/scenes/windmill_keeper-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.fox_trail",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in fox_trail",
+      "file": "assets/scenes/fox_trail-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.turtle_reflection",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in turtle_reflection",
+      "file": "assets/scenes/turtle_reflection-REVISED-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Placement revised after phone and contact-sheet review; final art and phone review pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.duck_lantern",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in duck_lantern",
+      "file": "assets/scenes/duck_lantern-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.kind_voice",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in kind_voice",
+      "file": "assets/scenes/kind_voice-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.night_bird",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in night_bird",
+      "file": "assets/scenes/night_bird-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.star_choice",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in star_choice",
+      "file": "assets/scenes/star_choice-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.bridge_crossroads",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in bridge_crossroads",
+      "file": "assets/scenes/bridge_crossroads-REVISED-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Placement revised after phone and contact-sheet review; final art and phone review pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.bridge_waterway",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in bridge_waterway",
+      "file": "assets/scenes/bridge_waterway-REVISED-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Placement revised after phone and contact-sheet review; final art and phone review pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.garden_crossroads",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in garden_crossroads",
+      "file": "assets/scenes/garden_crossroads-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.garden_waterway",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in garden_waterway",
+      "file": "assets/scenes/garden_waterway-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.hill_approach",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in hill_approach",
+      "file": "assets/scenes/hill_approach-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.pond_approach",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in pond_approach",
+      "file": "assets/scenes/pond_approach-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.woods_threshold",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in woods_threshold",
+      "file": "assets/scenes/woods_threshold-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.cloud_threshold",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in cloud_threshold",
+      "file": "assets/scenes/cloud_threshold-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.star_listen",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in star_listen",
+      "file": "assets/scenes/star_listen-REVISED-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Placement revised after phone and contact-sheet review; final art and phone review pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.bird_call",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in bird_call",
+      "file": "assets/scenes/bird_call-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.bell_walk",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in bell_walk",
+      "file": "assets/scenes/bell_walk-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.flower_walk",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in flower_walk",
+      "file": "assets/scenes/flower_walk-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.cloud_path",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in cloud_path",
+      "file": "assets/scenes/cloud_path-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.cloud_pillows",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in cloud_pillows",
+      "file": "assets/scenes/cloud_pillows-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.cloud_chime",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in cloud_chime",
+      "file": "assets/scenes/cloud_chime-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.cloud_trail",
+      "kind": "art",
+      "whereUsed": "background behind both princesses in cloud_trail",
+      "file": "assets/scenes/cloud_trail-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Scene-specific illustration; visual review with princess and dragon overlays on the phone is pending",
+      "replacementSpec": "Approve the scene and crop on phone or revise the illustration",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.ending_loud_bell",
+      "kind": "art",
+      "whereUsed": "background in ending_loud_bell",
+      "file": "assets/scenes/ending-loud-bell-WIDE-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Wide ending illustration with foreground ground; final art and phone review pending",
+      "replacementSpec": "Approve the art and crop on phone or revise",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.ending_dragon",
+      "kind": "art",
+      "whereUsed": "background in ending_dragon",
+      "file": "assets/scenes/ending-dragon-WIDE-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Wide ending illustration with foreground ground; final art and phone review pending",
+      "replacementSpec": "Approve the art and crop on phone or revise",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.ending_flowers",
+      "kind": "art",
+      "whereUsed": "background in ending_flowers",
+      "file": "assets/scenes/ending-flowers-WIDE-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Wide ending illustration with foreground ground; final art and phone review pending",
+      "replacementSpec": "Approve the art and crop on phone or revise",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.ending_bell",
+      "kind": "art",
+      "whereUsed": "background in ending_bell",
+      "file": "assets/scenes/ending-bell-WIDE-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Wide ending illustration with foreground ground; final art and phone review pending",
+      "replacementSpec": "Approve the art and crop on phone or revise",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.ending_song",
+      "kind": "art",
+      "whereUsed": "background in ending_song",
+      "file": "assets/scenes/ending-song-WIDE-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Wide ending illustration with foreground ground; final art and phone review pending",
+      "replacementSpec": "Approve the art and crop on phone or revise",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.pond_path",
+      "kind": "art",
+      "whereUsed": "background in pond_path",
+      "file": "assets/scenes/moon-pond-WIDE-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Wide pond illustration with dry foreground ground; final art and phone review pending",
+      "replacementSpec": "Approve the art and crop on phone or revise",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.castle_gate",
+      "kind": "art",
+      "whereUsed": "background in castle_gate",
+      "file": "assets/scenes/castle-gate-WIDE-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Wide scene illustration with foreground ground; final art and phone review pending",
+      "replacementSpec": "Approve the art and crop on phone or revise",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.garden_glow",
+      "kind": "art",
+      "whereUsed": "background in garden_glow",
+      "file": "assets/scenes/moon-garden-WIDE-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Wide scene illustration with foreground ground; final art and phone review pending",
+      "replacementSpec": "Approve the art and crop on phone or revise",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.whispering_woods",
+      "kind": "art",
+      "whereUsed": "background in whispering_woods",
+      "file": "assets/scenes/whispering-woods-WIDE-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Wide scene illustration with foreground ground; final art and phone review pending",
+      "replacementSpec": "Approve the art and crop on phone or revise",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.bell_tower",
+      "kind": "art",
+      "whereUsed": "background in bell_tower",
+      "file": "assets/scenes/bell-tower-WIDE-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Wide scene illustration with foreground ground; final art and phone review pending",
+      "replacementSpec": "Approve the art and crop on phone or revise",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.flower_path",
+      "kind": "art",
+      "whereUsed": "background in flower_path",
+      "file": "assets/scenes/lantern-flowers-WIDE-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Wide scene illustration with foreground ground; final art and phone review pending",
+      "replacementSpec": "Approve the art and crop on phone or revise",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.bridge_song",
+      "kind": "art",
+      "whereUsed": "background in bridge_song",
+      "file": "assets/scenes/bridge_song-REVISED-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Placement revised after phone and contact-sheet review; final art and phone review pending",
+      "replacementSpec": "Approve the art and crop on phone or revise",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.ending_cloud",
+      "kind": "art",
+      "whereUsed": "background in ending_cloud",
+      "file": "assets/scenes/ending_cloud-REVISED-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Placement revised after phone and contact-sheet review; final art and phone review pending",
+      "replacementSpec": "Approve the art and crop on phone or revise",
+      "dueMilestone": "first adventure phone review"
+    },
+    {
+      "id": "scene.ending_cloud_guide",
+      "kind": "art",
+      "whereUsed": "background in ending_cloud_guide",
+      "file": "assets/scenes/ending_cloud_guide-REVISED-DRAFT.png",
+      "status": "TEMPORARY",
+      "reason": "Placement revised after phone and contact-sheet review; final art and phone review pending",
+      "replacementSpec": "Approve the art and crop on phone or revise",
+      "dueMilestone": "first adventure phone review"
+    }
+  ]
+}

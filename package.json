@@ -1,0 +1,15 @@
+{
+  "name": "alishas-adventures",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build:3d": "node tools/build-3d.cjs",
+    "verify:3d": "node tools/build-3d.cjs --verify"
+  },
+  "dependencies": {
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

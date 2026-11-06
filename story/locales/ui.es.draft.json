@@ -1,0 +1,17 @@
+{
+  "language": "es", "status": "DRAFT_NEEDS_NATIVE_REVIEW",
+  "lines": {
+    "library.instruction": "Elige una historia. Mantén pulsada su imagen o toca el botón del altavoz para escuchar de qué trata.",
+    "library.storySpeaker": "Escuchar de qué trata esta historia",
+    "library.start": "Empezar la historia",
+    "library.resume": "Continuar la historia",
+    "library.restart": "Empezar desde el principio",
+    "player.replay": "Escuchar la situación y las opciones",
+    "player.replayShort": "Escuchar otra vez",
+    "player.help": "Ayúdame a elegir",
+    "player.helpShort": "Ayúdame",
+    "player.choiceSpeaker": "Escuchar esta opción otra vez",
+    "player.home": "Volver a las historias",
+    "player.ending": "Fin"
+  }
+}

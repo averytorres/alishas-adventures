@@ -1,0 +1,235 @@
+{
+  "status": "DRAFT_VISUAL_REVIEW_REQUIRED",
+  "scenes": {
+    "castle_gate": {
+      "background": "../assets/scenes/castle-gate-WIDE-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-sad-TEMP.png"
+    },
+    "bridge_song": {
+      "background": "../assets/scenes/bridge_song-REVISED-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "garden_glow": {
+      "background": "../assets/scenes/moon-garden-WIDE-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "frog_clue": {
+      "background": "../assets/scenes/frog_clue-REVISED-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "muddy_tracks": {
+      "background": "../assets/scenes/muddy_tracks-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "moth_clue": {
+      "background": "../assets/scenes/moth_clue-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "snail_clue": {
+      "background": "../assets/scenes/snail_clue-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "hill_path": {
+      "background": "../assets/scenes/windmill-hill-WIDE-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "pond_path": {
+      "background": "../assets/scenes/moon-pond-WIDE-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "windmill_keeper": {
+      "background": "../assets/scenes/windmill_keeper-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "fox_trail": {
+      "background": "../assets/scenes/fox_trail-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "turtle_reflection": {
+      "background": "../assets/scenes/turtle_reflection-REVISED-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "duck_lantern": {
+      "background": "../assets/scenes/duck_lantern-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "whispering_woods": {
+      "background": "../assets/scenes/whispering-woods-WIDE-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "cloud_edge": {
+      "background": "../assets/scenes/cloud-overlook-WIDE-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "kind_voice": {
+      "background": "../assets/scenes/kind_voice-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "night_bird": {
+      "background": "../assets/scenes/night_bird-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "bell_tower": {
+      "background": "../assets/scenes/bell-tower-WIDE-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "flower_path": {
+      "background": "../assets/scenes/lantern-flowers-WIDE-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "star_choice": {
+      "background": "../assets/scenes/star_choice-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "ending_bell": {
+      "background": "../assets/scenes/ending-bell-WIDE-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "ending_song": {
+      "background": "../assets/scenes/ending-song-WIDE-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "ending_loud_bell": {
+      "background": "../assets/scenes/ending-loud-bell-WIDE-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "ending_dragon": {
+      "background": "../assets/scenes/ending-dragon-WIDE-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "ending_flowers": {
+      "background": "../assets/scenes/ending-flowers-WIDE-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "ending_steps": {
+      "background": "../assets/scenes/ending-steps-DRAFT.png",
+      "backgroundPosition": "center 40%",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "ending_dawn": {
+      "background": "../assets/scenes/ending-dawn-DRAFT.png",
+      "backgroundPosition": "center 40%",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "bridge_crossroads": {
+      "background": "../assets/scenes/bridge_crossroads-REVISED-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "bridge_waterway": {
+      "background": "../assets/scenes/bridge_waterway-REVISED-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "garden_crossroads": {
+      "background": "../assets/scenes/garden_crossroads-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "garden_waterway": {
+      "background": "../assets/scenes/garden_waterway-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "hill_approach": {
+      "background": "../assets/scenes/hill_approach-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "pond_approach": {
+      "background": "../assets/scenes/pond_approach-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "woods_threshold": {
+      "background": "../assets/scenes/woods_threshold-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "cloud_threshold": {
+      "background": "../assets/scenes/cloud_threshold-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "star_listen": {
+      "background": "../assets/scenes/star_listen-REVISED-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "bird_call": {
+      "background": "../assets/scenes/bird_call-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "bell_walk": {
+      "background": "../assets/scenes/bell_walk-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "flower_walk": {
+      "background": "../assets/scenes/flower_walk-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "cloud_path": {
+      "background": "../assets/scenes/cloud_path-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "cloud_pillows": {
+      "background": "../assets/scenes/cloud_pillows-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "ending_cloud": {
+      "background": "../assets/scenes/ending_cloud-REVISED-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "ending_click": {
+      "background": "../assets/scenes/ending-click-DRAFT.png",
+      "backgroundPosition": "center 40%",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "ending_cloud_guide": {
+      "background": "../assets/scenes/ending_cloud_guide-REVISED-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "cloud_chime": {
+      "background": "../assets/scenes/cloud_chime-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    },
+    "cloud_trail": {
+      "background": "../assets/scenes/cloud_trail-DRAFT.png",
+      "backgroundPosition": "center center",
+      "dragon": "../assets/candidates/dragon-happy-TEMP.png"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "language": "en", "status": "DRAFT_UNREVIEWED",
+  "lines": {
+    "library.instruction": "Choose a story. Press and hold its picture, or tap its speaker button, to hear what it is about.",
+    "library.storySpeaker": "Hear about this story",
+    "library.start": "Start story",
+    "library.resume": "Continue story",
+    "library.restart": "Start from the beginning",
+    "player.replay": "Hear the situation and choices again",
+    "player.replayShort": "Listen again",
+    "player.help": "Help me choose",
+    "player.helpShort": "Help me",
+    "player.choiceSpeaker": "Hear this choice again",
+    "player.home": "Go to stories",
+    "player.ending": "The end"
+  }
+}

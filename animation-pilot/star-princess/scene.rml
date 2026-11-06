@@ -1,0 +1,148 @@
+<Rive version="1" kind="fragment">
+  <Artboard defaultStateMachineId="0:7" viewModelId="0:200" viewModelInstanceId="0:201" styleId="0:5" width="360" height="760" name="Star Princess Puppet TEMP" id="0:2">
+    <LayoutComponentStyle name="Artboard Style" id="0:5"/>
+    <AudioEvent assetId="0:301" name="Play Clara Sample TEMP" id="0:300"/>
+    <StateMachine name="Puppet Test" id="0:7">
+      <StateMachineLayer name="Idle" id="0:8">
+        <EntryState x="0" y="0"><StateTransition stateToId="0:12"/></EntryState>
+        <AnimationState x="180" y="0" animationId="0:20" id="0:12"/>
+      </StateMachineLayer>
+      <StateMachineLayer name="Blink" id="0:9">
+        <EntryState x="0" y="0"><StateTransition stateToId="0:13"/></EntryState>
+        <AnimationState x="180" y="0" animationId="0:21" id="0:13"/>
+      </StateMachineLayer>
+      <StateMachineLayer name="Mouth Demo" id="0:10">
+        <EntryState x="0" y="0"><StateTransition stateToId="0:14"/></EntryState>
+        <AnimationState x="180" y="0" animationId="0:24" id="0:14">
+          <StateTransition stateToId="0:16">
+            <TransitionViewModelCondition opValue="equal">
+              <TransitionPropertyViewModelComparator><BindablePropertyBoolean><DataBindContext sourcePathIds="0:200-0:202" propertyKey="634"/></BindablePropertyBoolean></TransitionPropertyViewModelComparator>
+              <TransitionValueBooleanComparator value="true"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+        </AnimationState>
+        <AnimationState x="360" y="0" animationId="0:22" id="0:16">
+          <StateMachineFireEvent eventId="0:300" occursValue="atStart"/>
+          <StateTransition stateToId="0:14">
+            <TransitionViewModelCondition opValue="equal">
+              <TransitionPropertyViewModelComparator><BindablePropertyBoolean><DataBindContext sourcePathIds="0:200-0:202" propertyKey="634"/></BindablePropertyBoolean></TransitionPropertyViewModelComparator>
+              <TransitionValueBooleanComparator value="false"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+        </AnimationState>
+      </StateMachineLayer>
+      <StateMachineLayer name="Wave Demo" id="0:11">
+        <EntryState x="0" y="0"><StateTransition stateToId="0:15"/></EntryState>
+        <AnimationState x="180" y="0" animationId="0:25" id="0:15">
+          <StateTransition stateToId="0:17">
+            <TransitionViewModelCondition opValue="equal">
+              <TransitionPropertyViewModelComparator><BindablePropertyBoolean><DataBindContext sourcePathIds="0:200-0:203" propertyKey="634"/></BindablePropertyBoolean></TransitionPropertyViewModelComparator>
+              <TransitionValueBooleanComparator value="true"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+        </AnimationState>
+        <AnimationState x="360" y="0" animationId="0:23" id="0:17">
+          <StateTransition stateToId="0:15">
+            <TransitionViewModelCondition opValue="equal">
+              <TransitionPropertyViewModelComparator><BindablePropertyBoolean><DataBindContext sourcePathIds="0:200-0:203" propertyKey="634"/></BindablePropertyBoolean></TransitionPropertyViewModelComparator>
+              <TransitionValueBooleanComparator value="false"/>
+            </TransitionViewModelCondition>
+          </StateTransition>
+        </AnimationState>
+      </StateMachineLayer>
+    </StateMachine>
+    <Node x="0" y="110" scaleX="0.5" scaleY="0.5" name="Phone Scale" id="0:29">
+    <Node x="45" y="28" name="Body Group" id="0:30">
+      <Solo x="315" y="108" rotation="-0.08" activeComponentId="0:40" name="Eyes" id="0:39">
+        <Image scaleX="0.4" scaleY="0.4" originX="0" originY="0" assetId="0:105" name="Open Eyes" id="0:40"/>
+        <Image scaleX="0.4" scaleY="0.4" originX="0" originY="0" assetId="0:106" name="Both Eyes Closed" id="0:41"/>
+      </Solo>
+      <Solo x="352" y="155" rotation="-0.08" activeComponentId="0:42" name="Mouth" id="0:49">
+        <Image scaleX="0.35" scaleY="0.35" originX="0" originY="0" assetId="0:107" name="Closed Smile" id="0:42"/>
+        <Image scaleX="0.35" scaleY="0.35" originX="0" originY="0" assetId="0:108" name="Narrow" id="0:43"/>
+        <Image scaleX="0.35" scaleY="0.35" originX="0" originY="0" assetId="0:109" name="Wide" id="0:44"/>
+        <Image scaleX="0.35" scaleY="0.35" originX="0" originY="0" assetId="0:110" name="Round O" id="0:45"/>
+        <Image scaleX="0.35" scaleY="0.35" originX="0" originY="0" assetId="0:111" name="Big Smile" id="0:46"/>
+      </Solo>
+      <Node x="290" y="300" name="Left Shoulder" id="0:32">
+        <Image x="-255" y="-50" originX="0" originY="0" assetId="0:102" name="Left Arm" id="0:33"/>
+      </Node>
+      <Image originX="0" originY="0" assetId="0:101" name="Body" id="0:31"/>
+      <Node x="420" y="300" name="Right Shoulder" id="0:34">
+        <Solo activeComponentId="0:35" name="Right Arm Pose" id="0:37">
+          <Image x="255" y="-50" scaleX="-1" originX="0" originY="0" assetId="0:102" name="Right Arm Down" id="0:35"/>
+          <Image x="180" y="-158" scaleX="-1" originX="0" originY="0" assetId="0:103" name="Right Arm Wave" id="0:36"/>
+        </Solo>
+      </Node>
+    </Node>
+    </Node>
+    <LinearAnimation fps="60" duration="240" loopValue="loop" name="Breathing Idle" id="0:20">
+      <KeyedObject objectId="0:30"><KeyedProperty propertyKey="14">
+        <KeyFrameDouble frame="0" value="28" interpolationType="cubic"><CubicEaseInterpolator x1="0.42" y1="0" x2="0.58" y2="1"/></KeyFrameDouble>
+        <KeyFrameDouble frame="120" value="23" interpolationType="cubic"><CubicEaseInterpolator x1="0.42" y1="0" x2="0.58" y2="1"/></KeyFrameDouble>
+        <KeyFrameDouble frame="239" value="28"/>
+      </KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:32"><KeyedProperty propertyKey="15">
+        <KeyFrameDouble frame="0" value="0" interpolationType="cubic"><CubicEaseInterpolator x1="0.42" y1="0" x2="0.58" y2="1"/></KeyFrameDouble>
+        <KeyFrameDouble frame="120" value="0.035" interpolationType="cubic"><CubicEaseInterpolator x1="0.42" y1="0" x2="0.58" y2="1"/></KeyFrameDouble>
+        <KeyFrameDouble frame="239" value="0"/>
+      </KeyedProperty></KeyedObject>
+    </LinearAnimation>
+    <LinearAnimation fps="60" duration="240" loopValue="loop" name="Both Eyes Blink" id="0:21">
+      <KeyedObject objectId="0:39"><KeyedProperty propertyKey="296">
+        <KeyFrameId frame="0" value="0:40"/>
+        <KeyFrameId frame="182" value="0:41"/>
+        <KeyFrameId frame="190" value="0:40"/>
+      </KeyedProperty></KeyedObject>
+    </LinearAnimation>
+    <LinearAnimation fps="60" duration="60" loopValue="loop" name="Five Mouth Poses Demo" id="0:22">
+      <KeyedObject objectId="0:49"><KeyedProperty propertyKey="296">
+        <KeyFrameId frame="0" value="0:42"/>
+        <KeyFrameId frame="8" value="0:43"/>
+        <KeyFrameId frame="18" value="0:44"/>
+        <KeyFrameId frame="30" value="0:45"/>
+        <KeyFrameId frame="42" value="0:46"/>
+        <KeyFrameId frame="52" value="0:43"/>
+      </KeyedProperty></KeyedObject>
+    </LinearAnimation>
+    <LinearAnimation fps="60" duration="60" name="Wave Gesture" id="0:23">
+      <KeyedObject objectId="0:37"><KeyedProperty propertyKey="296">
+        <KeyFrameId frame="0" value="0:36"/>
+        <KeyFrameId frame="46" value="0:35"/>
+      </KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:34"><KeyedProperty propertyKey="15">
+        <KeyFrameDouble frame="0" value="0" interpolationType="linear"/>
+        <KeyFrameDouble frame="12" value="-0.08" interpolationType="linear"/>
+        <KeyFrameDouble frame="26" value="0.07" interpolationType="linear"/>
+        <KeyFrameDouble frame="40" value="-0.06" interpolationType="linear"/>
+        <KeyFrameDouble frame="46" value="0"/>
+      </KeyedProperty></KeyedObject>
+    </LinearAnimation>
+    <LinearAnimation fps="60" duration="1" name="Mouth At Rest" id="0:24">
+      <KeyedObject objectId="0:49"><KeyedProperty propertyKey="296"><KeyFrameId frame="0" value="0:42"/></KeyedProperty></KeyedObject>
+    </LinearAnimation>
+    <LinearAnimation fps="60" duration="1" name="Arm At Rest" id="0:25">
+      <KeyedObject objectId="0:37"><KeyedProperty propertyKey="296"><KeyFrameId frame="0" value="0:35"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:34"><KeyedProperty propertyKey="15"><KeyFrameDouble frame="0" value="0"/></KeyedProperty></KeyedObject>
+    </LinearAnimation>
+  </Artboard>
+  <ImageAsset file="body-TEMP.png" name="Body Art TEMP" id="0:101"/>
+  <ImageAsset file="arm-down-TEMP.png" name="Arm Art TEMP" id="0:102"/>
+  <ImageAsset file="arm-wave-TEMP.png" name="Wave Arm TEMP" id="0:103"/>
+  <ImageAsset file="eyes-open-TEMP.png" name="Eyes Open TEMP" id="0:105"/>
+  <ImageAsset file="eyes-closed-TEMP.png" name="Eyes Closed TEMP" id="0:106"/>
+  <ImageAsset file="mouth-closed-TEMP.png" name="Mouth Closed TEMP" id="0:107"/>
+  <ImageAsset file="mouth-narrow-TEMP.png" name="Mouth Narrow TEMP" id="0:108"/>
+  <ImageAsset file="mouth-wide-TEMP.png" name="Mouth Wide TEMP" id="0:109"/>
+  <ImageAsset file="mouth-round-TEMP.png" name="Mouth Round TEMP" id="0:110"/>
+  <ImageAsset file="mouth-smile-TEMP.png" name="Mouth Smile TEMP" id="0:111"/>
+  <AudioAsset file="clara-choice-TEMP.mp3" name="Clara Choice Sample TEMP" id="0:301"/>
+  <ViewModel defaultInstanceId="0:201" name="StarPuppet" id="0:200">
+    <ViewModelPropertyBoolean name="speaking" id="0:202"/>
+    <ViewModelPropertyBoolean name="waving" id="0:203"/>
+    <ViewModelInstance exports="true" name="Default" id="0:201">
+      <ViewModelInstanceBoolean propertyValue="false" viewModelPropertyId="0:202"/>
+      <ViewModelInstanceBoolean propertyValue="false" viewModelPropertyId="0:203"/>
+    </ViewModelInstance>
+  </ViewModel>
+</Rive>

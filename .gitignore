@@ -1,0 +1,32 @@
+# Local builds and signed packages
+/android/build/
+/android/debug.keystore
+/*.apk
+/*.apk.idsig
+/*.aab
+/*.idsig
+
+# Credentials and machine-local settings
+.env
+.env.*
+!.env.example
+.secrets/
+/audio/generation-ledger.draft.json
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.pem
+*.key
+*.zip
+
+# Generated previews and caches
+/animation-pilot/star-princess/build/
+/animation-pilot/storybook-3d/meshy-preview/
+/work/
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+Thumbs.db
+.DS_Store
