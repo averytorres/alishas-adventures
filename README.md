@@ -32,7 +32,7 @@ Stories, pictures, and recorded voices are included in the app. **No login or in
 
 ## Getting the app
 
-The first adventure is playable, and the Android app is still being prepared for a public release. There is no download linked here yet.
+[Download Alisha's Adventures for Android](https://github.com/averytorres/alishas-adventures/releases/latest/download/Alishas-Adventures-v0.1.0.apk). Install the APK on a device running Android 8 or newer. Your device may ask you to allow installs from the app you used to download it. Once installed, the story plays offline.
 
 ## Want to work on the game?
 

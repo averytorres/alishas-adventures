@@ -2,12 +2,14 @@ param(
   [string]$Sdk=$env:ANDROID_SDK_ROOT,
   [string]$Jdk=$env:JAVA_HOME,
   [string]$Keystore,
+  [switch]$Release,
   [switch]$DevelopmentV2,
   [switch]$LegacyMvp,
   [switch]$KeepBuildFiles
 )
 $ErrorActionPreference='Stop'
 if($DevelopmentV2 -and $LegacyMvp){throw 'Choose either -DevelopmentV2 or -LegacyMvp, not both.'}
+if($Release -and $LegacyMvp){throw 'The release build uses the current story app.'}
 $buildV2 = -not $LegacyMvp
 $root=$PSScriptRoot
 if(-not $Sdk){$Sdk=$env:ANDROID_HOME}
@@ -28,7 +30,7 @@ if($buildV2){
   foreach($folder in @('v2','engine','story','audio')){Copy-Item (Join-Path $root $folder) (Join-Path "$b\assets" $folder) -Recurse -Force}
 }else{Copy-Item "$root\index.html","$root\styles.css","$root\app.js" "$b\assets" -Force}
 Copy-Item "$root\assets" "$b\assets\assets" -Recurse -Force
-$unsigned="$b\unsigned.apk";$aligned="$b\aligned.apk";$out=if($buildV2){"$root\Alishas-Adventures-DRAFT.apk"}else{"$root\PrincessAdventure-debug.apk"}
+$unsigned="$b\unsigned.apk";$aligned="$b\aligned.apk";$out=if($Release){"$root\Alishas-Adventures-v0.1.0.apk"}elseif($buildV2){"$root\Alishas-Adventures-DRAFT.apk"}else{"$root\PrincessAdventure-debug.apk"}
 Run $aapt @('compile','--dir',"$root\android\res",'-o',"$b\resources.zip")
 Run $aapt @('link','-o',$unsigned,'-I',$jarAndroid,'--manifest',"$root\android\AndroidManifest.xml",'-R',"$b\resources.zip",'--min-sdk-version','26','--target-sdk-version','35')
 $activity="$root\android\src\com\princessadventure\MainActivity.java"
@@ -40,6 +42,7 @@ Run $jar @('uf',$unsigned,'-C',"$b\dex",'classes.dex','-C',$b,'assets')
 Run $align @('-f','4',$unsigned,$aligned)
 $key=if($Keystore){$Keystore}else{Join-Path $root 'android\debug.keystore'}
 if(!(Test-Path -LiteralPath $key)){
+  if($Release){throw 'The original signing key is required for this release so installed copies can update without losing progress.'}
   Write-Warning 'Creating a new debug signing key. APKs signed with a different key cannot update an existing installation. Keep this key or pass -Keystore.'
   Run $keytool @('-genkeypair','-keystore',$key,'-storepass','android','-keypass','android','-alias','androiddebugkey','-dname','CN=Android Debug,O=Android,C=US','-keyalg','RSA','-keysize','2048','-validity','10000')
 }

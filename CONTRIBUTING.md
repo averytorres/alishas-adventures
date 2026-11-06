@@ -50,9 +50,9 @@ Install a JDK, Android SDK platform 35, and Android SDK build-tools 36.0.0. Set 
 .\build-android.ps1
 ```
 
-You can instead pass `-Jdk` and `-Sdk` paths to the script. This produces a debug-signed development APK, not a store release. Test the exact build on an Android device before reporting phone behavior.
+You can instead pass `-Jdk` and `-Sdk` paths to the script. This produces a development APK. For a versioned GitHub release build, pass `-Release`. Test the exact build on an Android device before reporting phone behavior.
 
-The local `android/debug.keystore` is excluded from Git. A new debug key cannot update an existing installation signed with a different key. Transfer the existing key securely outside this repository when in-place development updates are needed; use a separate protected release key for publication. Build output, local credentials, and APKs are also excluded from Git.
+The local `android/debug.keystore` is excluded from Git. The v0.1.0 release uses that original certificate so it can update installed copies while retaining saved progress. Back up the signing key securely: losing it prevents future in-place updates under this package name. A new key cannot update an installation signed with a different certificate. Build output, local credentials, and APKs are also excluded from Git.
 
 ## Project content
 
