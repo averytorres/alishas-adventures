@@ -15,7 +15,7 @@ node production/check-route.mjs
 node --test v2/*.test.mjs v2/shared-stage/*.test.mjs
 ```
 
-The route checker follows the cloud-guide ending and verifies its mapped art, text hashes, and recordings. It does not certify every branch, localization, visual detail, or Android behavior. All 46 scenes have recorded English, Spanish, and Gujarati situation, choice, and hint lines. Two Gujarati situations use paragraph highlighting because their word timings need correction. Art, scripts, translations, and timing cues remain drafts requiring review.
+The route checker follows the cloud-guide ending and verifies its mapped art, text hashes, and recordings. It does not certify every branch, localization, visual detail, or Android behavior. All 46 scenes have recorded English, Spanish, and Gujarati situation, choice, and hint lines. Art, scripts, translations, and timing cues remain drafts requiring review.
 
 ## Android build
 
